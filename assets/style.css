@@ -1,0 +1,9 @@
+/* Remove extra top padding on all pages */
+.block-container {
+    padding-top: 2rem !important;
+}
+
+/* Remove the blank space Streamlit adds above first element */
+div[data-testid="stAppViewContainer"] > section > div {
+    padding-top: 0rem !important;
+}
