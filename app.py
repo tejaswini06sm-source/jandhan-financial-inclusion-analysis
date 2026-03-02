@@ -29,7 +29,6 @@ df = get_data()
 # SIDEBAR
 # ══════════════════════════════════════════════
 with st.sidebar:
-    st.image("https://pmjdy.gov.in/images/pmjdy-logo.png", width=60)
     st.markdown("## 🏦 PMJDY Dashboard")
     st.markdown("**India's Financial Inclusion Monitor**")
     st.markdown("---")

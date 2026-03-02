@@ -511,3 +511,12 @@
    ::-webkit-scrollbar-track { background: #F1F5F9; }
    ::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 10px; }
    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+   /* Prevent sidebar from being collapsed/hidden */
+[data-testid="collapsedControl"] {
+    display: none !important;
+}
+
+[data-testid="stSidebar"][aria-expanded="false"] {
+    display: block !important;
+    min-width: 280px !important;
+}
