@@ -33,7 +33,17 @@ with st.sidebar:
     st.markdown("**India's Financial Inclusion Monitor**")
     st.markdown("---")
     st.markdown("### 📌 Navigate To")
+    st.page_link("app.py", label="🏠 Home")
+    st.page_link("pages/1_National_View.py", label="🗺️ National View")
+    st.page_link("pages/2_State_Analysis.py", label="📊 State Analysis")
+    st.page_link("pages/3_District_View.py", label="🏘️ District Explorer")
+    st.page_link("pages/4_Gender_Analysis.py", label="👥 Gender Analysis")
+    st.page_link("pages/5_Balance_Analysis.py", label="💰 Balance Analysis")
+    st.page_link("pages/6_ML_Insights.py", label="🤖 ML Insights")
+    st.page_link("pages/7_Policy_Brief.py", label="📄 Policy Brief")
+    st.page_link("pages/8_About.py", label="ℹ️ About")
     st.markdown("---")
+    
     st.markdown("**Data Sources**")
     st.markdown("📁 Ministry of Finance, GoI")
     st.markdown("📁 Rajya Sabha Unstarred Questions")
@@ -244,15 +254,7 @@ with col2:
 # FOOTER
 # ══════════════════════════════════════════════
 st.markdown("---")
-st.markdown("""
-<div class='gov-footer'>
-    🏦 PMJDY Financial Inclusion Dashboard &nbsp;|&nbsp;
-    Data: Ministry of Finance, GoI &nbsp;|&nbsp;
-    Rajya Sabha Unstarred Questions (2022–2024) &nbsp;|&nbsp;
-    Built by Tejaswini Shidheshwar Mathpati &nbsp;|&nbsp;
-    <a href='https://pmjdy.gov.in' style='color:#AED6F1;'>pmjdy.gov.in</a>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("<div class='gov-footer'>🏦 PMJDY Financial Inclusion Dashboard &nbsp;|&nbsp; Independent Research Project &nbsp;|&nbsp; Built by Tejaswini S S Mathpati &nbsp;|&nbsp; 2026</div>", unsafe_allow_html=True)
 
 # Back to top
 st.markdown("""

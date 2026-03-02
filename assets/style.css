@@ -614,3 +614,7 @@
         font-size: 15px !important;
     }
 }
+/* ── HIDE AUTO-GENERATED STREAMLIT NAV ── */
+[data-testid="stSidebarNav"] {
+    display: none !important;
+}
