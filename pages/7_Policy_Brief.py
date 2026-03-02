@@ -10,7 +10,7 @@ from utils.data_loader import load_state_data
 st.set_page_config(page_title="Policy Brief — PMJDY", page_icon="📄", layout="wide")
 
 try:
-    with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css")) as f:
+    with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 except:
     pass

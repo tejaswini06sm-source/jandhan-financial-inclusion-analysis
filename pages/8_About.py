@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 st.set_page_config(page_title="About — PMJDY Dashboard", page_icon="ℹ️", layout="wide")
 
-with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css")) as f:
+with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 with st.sidebar:
