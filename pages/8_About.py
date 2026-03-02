@@ -9,6 +9,8 @@ with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "st
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 with st.sidebar:
+    st.page_link("app.py", label="🏠 Back to Home")
+    st.markdown("---")
     st.markdown("## ℹ️ About")
     st.markdown("---")
 

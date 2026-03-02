@@ -32,6 +32,8 @@ if 'Region' in df.columns:
 
 # ── SIDEBAR ──
 with st.sidebar:
+    st.page_link("app.py", label="🏠 Back to Home")
+    st.markdown("---")
     st.markdown("## 📄 Policy Brief")
     st.markdown("---")
     st.markdown("---")

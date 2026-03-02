@@ -19,6 +19,8 @@ def get_data():
 balance_dist, state_df, bihar = get_data()
 
 with st.sidebar:
+    st.page_link("app.py", label="🏠 Back to Home")
+    st.markdown("---")
     st.markdown("## 💰 Balance Analysis")
     st.markdown("---")
     st.markdown("---")

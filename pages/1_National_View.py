@@ -25,6 +25,8 @@ df = get_data()
 
 # ── SIDEBAR FILTERS ──
 with st.sidebar:
+    st.page_link("app.py", label="🏠 Back to Home")
+    st.markdown("---")
     st.markdown("## 🗺️ National View")
     st.markdown("---")
     st.markdown("---")

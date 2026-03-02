@@ -19,6 +19,8 @@ def get_data():
 karnataka, state_df = get_data()
 
 with st.sidebar:
+    st.page_link("app.py", label="🏠 Back to Home")
+    st.markdown("---")
     st.markdown("## 👥 Gender Analysis")
     st.markdown("---")
     st.markdown("---")

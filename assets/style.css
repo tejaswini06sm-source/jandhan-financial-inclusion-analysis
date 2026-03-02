@@ -618,3 +618,7 @@
 [data-testid="stSidebarNav"] {
     display: none !important;
 }
+/* Hide keyboard_double element */
+[data-testid="stSidebarHeader"] {
+    display: none !important;
+}

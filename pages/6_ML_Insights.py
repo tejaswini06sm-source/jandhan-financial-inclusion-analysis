@@ -25,6 +25,8 @@ def get_data():
 df, maha = get_data()
 
 with st.sidebar:
+    st.page_link("app.py", label="🏠 Back to Home")
+    st.markdown("---")
     st.markdown("## 🤖 ML Insights")
     st.markdown("---")
 

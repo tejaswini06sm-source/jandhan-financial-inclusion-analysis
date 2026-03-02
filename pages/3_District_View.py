@@ -20,6 +20,8 @@ def get_data():
 bihar, karnataka, maharashtra = get_data()
 
 with st.sidebar:
+    st.page_link("app.py", label="🏠 Back to Home")
+    st.markdown("---")
     st.markdown("## 🏘️ District Explorer")
     st.markdown("---")
     st.markdown("---")
