@@ -11,15 +11,6 @@ with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "st
 with st.sidebar:
     st.markdown("## ℹ️ About")
     st.markdown("---")
-    st.page_link("app.py", label="🏠 Home")
-    st.page_link("pages/1_National_View.py", label="🗺️ National View")
-    st.page_link("pages/2_State_Analysis.py", label="📊 State Analysis")
-    st.page_link("pages/3_District_View.py", label="🏘️ District Explorer")
-    st.page_link("pages/4_Gender_Analysis.py", label="👥 Gender Analysis")
-    st.page_link("pages/5_Balance_Analysis.py", label="💰 Balance Analysis")
-    st.page_link("pages/6_ML_Insights.py", label="🤖 ML Insights")
-    st.page_link("pages/7_Policy_Brief.py", label="📄 Policy Brief")
-    st.page_link("pages/8_About.py", label="ℹ️ About")
 
 st.markdown("""
 <div class='gov-header'>
