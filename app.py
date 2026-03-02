@@ -205,24 +205,20 @@ with col2:
 st.markdown("---")
 st.markdown("### 🧭 How to Use This Dashboard")
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2 = st.columns(2)
 with col1:
     st.markdown("""
     **🗺️ National View**
     See all 36 states ranked, mapped, and compared. Find which regions are leading and which are lagging.
-    """)
-with col2:
-    st.markdown("""
+
     **📊 State Analysis**
     Deep dive into any individual state — accounts, deposits, per capita performance, and peer comparison.
     """)
-with col3:
+with col2:
     st.markdown("""
     **🏘️ District Explorer**
     Compare districts across Bihar, Karnataka & Maharashtra. Search, filter, and download.
-    """)
-with col4:
-    st.markdown("""
+
     **🤖 ML Insights**
     Machine learning identifies underperformers, growth trajectories, and anomalies in the data.
     """)

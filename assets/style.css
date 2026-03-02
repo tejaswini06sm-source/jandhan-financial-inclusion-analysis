@@ -520,3 +520,97 @@
     display: block !important;
     min-width: 280px !important;
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE RESPONSIVE FIXES
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .block-container {
+        padding: 1rem 0.75rem !important;
+        max-width: 100% !important;
+    }
+
+    .gov-header {
+        padding: 16px 18px !important;
+    }
+
+    .gov-header h1 {
+        font-size: 18px !important;
+    }
+
+    .gov-header h2 {
+        font-size: 13px !important;
+    }
+
+    .gov-header p {
+        font-size: 11px !important;
+    }
+
+    [data-testid="stMetricValue"] {
+        font-size: 18px !important;
+    }
+
+    [data-testid="stMetricLabel"] {
+        font-size: 10px !important;
+    }
+
+    [data-testid="stMetric"] {
+        padding: 10px 12px !important;
+    }
+
+    .kpi-card {
+        padding: 14px 16px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .kpi-card p {
+        font-size: 13px !important;
+    }
+
+    .info-box, .warning-box, .success-box, .danger-box {
+        padding: 14px 16px !important;
+        font-size: 13px !important;
+    }
+
+    .gov-footer {
+        font-size: 10px !important;
+        padding: 12px 14px !important;
+        letter-spacing: 0 !important;
+    }
+
+    h1 { font-size: 20px !important; }
+    h2 { font-size: 16px !important; }
+    h3 { font-size: 14px !important; }
+
+    /* Stack columns on mobile */
+    [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap !important;
+    }
+
+    [data-testid="stHorizontalBlock"] > div {
+        min-width: 45% !important;
+        flex: 1 1 45% !important;
+    }
+
+    /* Fix expander content */
+    [data-testid="stExpander"] summary {
+        font-size: 13px !important;
+        padding: 10px 14px !important;
+    }
+
+    /* Fix source tag */
+    .source-tag {
+        font-size: 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    [data-testid="stHorizontalBlock"] > div {
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
+    .gov-header h1 {
+        font-size: 15px !important;
+    }
+}
