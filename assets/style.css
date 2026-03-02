@@ -622,3 +622,12 @@
 [data-testid="stSidebarHeader"] {
     display: none !important;
 }
+/* Fix sidebar selectbox text color */
+[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] div {
+    color: #1E293B !important;
+    background-color: #FFFFFF !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
+    fill: #1E293B !important;
+}
