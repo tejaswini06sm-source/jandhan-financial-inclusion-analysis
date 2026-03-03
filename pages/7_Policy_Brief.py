@@ -150,7 +150,7 @@ with st.expander("📊 Evidence for Finding 1 — Activation Gap", expanded=Fals
                          color="Avg_Balance_INR", color_continuous_scale="Reds_r",
                          labels={"Avg_Balance_INR": "Avg Balance (₹)"},
                          title="5 States with Lowest Avg Balance")
-            fig.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white", height=300, showcoloraxis=False)
+            fig.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white", height=300, )
             st.plotly_chart(fig, use_container_width=True)
         except Exception as e:
             st.error(f"Chart error: {e}")

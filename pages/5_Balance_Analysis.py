@@ -121,7 +121,7 @@ with col2:
                   labels={"Amount_Crore": "Amount (₹ Crore)", "Particulars": "Balance Slab"},
                   title="Deposits by Balance Category (₹ Crore)")
     fig2.update_traces(texttemplate="₹%{text:.2f} Cr", textposition="outside")
-    fig2.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white", height=380, xaxis_tickangle=-20, showcoloraxis=False)
+    fig2.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white", height=380, xaxis_tickangle=-20, )
     st.plotly_chart(fig2, use_container_width=True)
 
 st.markdown("---")
@@ -172,7 +172,7 @@ with col1:
     bihar_avg = filtered_bihar["Avg_Balance_INR"].mean()
     if show_nat_avg_line and bihar_sort == "Avg_Balance_INR":
         fig4.add_vline(x=bihar_avg, line_dash="dash", line_color="#1F4E79", annotation_text=f"State avg: ₹{bihar_avg:.0f}")
-    fig4.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white", showcoloraxis=False)
+    fig4.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white", )
     st.plotly_chart(fig4, use_container_width=True)
 
 with col2:
