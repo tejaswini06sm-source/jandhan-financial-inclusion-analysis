@@ -7,7 +7,7 @@ from datetime import datetime
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_state_data
 
-st.set_page_config(page_title="Policy Brief — PMJDY", page_icon="📄", layout="wide")
+st.set_page_config(page_title="Policy Brief - PMJDY", page_icon="📄", layout="wide")
 
 try:
     with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
@@ -47,7 +47,7 @@ with st.sidebar:
 # ── HEADER ──
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>📄 Policy Brief — PMJDY Financial Inclusion</h1>
+    <h1 style='margin:0; font-size:24px;'>📄 Policy Brief - PMJDY Financial Inclusion</h1>
     <p style='margin:5px 0 0 0; opacity:0.9;'>Evidence-based findings and actionable recommendations from real government data</p>
 </div>
 """, unsafe_allow_html=True)
@@ -83,7 +83,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.error("""
-    **Finding 1 — The Activation Gap**
+    **Finding 1 - The Activation Gap**
 
     Having an account ≠ using an account.
     Karnataka district data shows 17–37% of
@@ -99,7 +99,7 @@ with col1:
 
 with col2:
     st.warning("""
-    **Finding 2 — The Cash Dependency Trap**
+    **Finding 2 - The Cash Dependency Trap**
 
     Wage earners (MGNREGA, daily labour)
     receive payments via PMJDY but withdraw
@@ -115,9 +115,9 @@ with col2:
 
 with col3:
     st.success("""
-    **Finding 3 — Geography Determines Fate**
+    **Finding 3 - Geography Determines Fate**
 
-    Avg balance ranges widely across states —
+    Avg balance ranges widely across states -
     a large gap between top and bottom states.
     Southern and western states dramatically
     outperform eastern and northeastern states.
@@ -133,7 +133,7 @@ with col3:
 st.markdown("---")
 st.markdown("## 📊 Evidence Supporting Each Finding")
 
-with st.expander("📊 Evidence for Finding 1 — Activation Gap", expanded=False):
+with st.expander("📊 Evidence for Finding 1 - Activation Gap", expanded=False):
     col1, col2 = st.columns(2)
     with col1:
         st.metric("Karnataka Avg Inactive Rate", "~27%", "Across 30 districts")
@@ -155,7 +155,7 @@ with st.expander("📊 Evidence for Finding 1 — Activation Gap", expanded=Fals
         except Exception as e:
             st.error(f"Chart error: {e}")
 
-with st.expander("📊 Evidence for Finding 2 — Cash Dependency", expanded=False):
+with st.expander("📊 Evidence for Finding 2 - Cash Dependency", expanded=False):
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
@@ -180,7 +180,7 @@ with st.expander("📊 Evidence for Finding 2 — Cash Dependency", expanded=Fal
         except Exception as e:
             st.error(f"Chart error: {e}")
 
-with st.expander("📊 Evidence for Finding 3 — Geographic Inequality", expanded=False):
+with st.expander("📊 Evidence for Finding 3 - Geographic Inequality", expanded=False):
     try:
         df_sorted = df.sort_values("Avg_Balance_INR").copy()
         color_col = "Region" if "Region" in df_sorted.columns else None
@@ -191,7 +191,7 @@ with st.expander("📊 Evidence for Finding 3 — Geographic Inequality", expand
             color=color_col,
             labels={"Avg_Balance_INR": "Avg Balance (₹)", "State": ""},
             height=600,
-            title="Avg Balance by State — Geographic Divide is Clear"
+            title="Avg Balance by State - Geographic Divide is Clear"
         )
         fig3.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
         st.plotly_chart(fig3, use_container_width=True)
@@ -218,13 +218,13 @@ recs = [
     {
         "icon": "3️⃣",
         "title": "Prioritize BC Network in ML-Identified High Priority Districts",
-        "detail": "The ML clustering in this dashboard identifies specific states and districts that are underperforming relative to their population. Use this model to guide Business Correspondent network expansion — place new agents in Needs Attention districts first.",
+        "detail": "The ML clustering in this dashboard identifies specific states and districts that are underperforming relative to their population. Use this model to guide Business Correspondent network expansion - place new agents in Needs Attention districts first.",
         "impact": "High", "feasibility": "High", "timeline": "12-18 months"
     },
     {
         "icon": "4️⃣",
         "title": "Women-Specific Financial Literacy at MGNREGA Worksites",
-        "detail": "Karnataka data shows districts with higher female account shares have lower operative rates — suggesting women have accounts but lack agency to use them. Deploy financial literacy camps specifically targeting women at MGNREGA worksites, Anganwadi centres, and SHG meetings.",
+        "detail": "Karnataka data shows districts with higher female account shares have lower operative rates - suggesting women have accounts but lack agency to use them. Deploy financial literacy camps specifically targeting women at MGNREGA worksites, Anganwadi centres, and SHG meetings.",
         "impact": "Medium", "feasibility": "High", "timeline": "6 months"
     },
     {
@@ -235,7 +235,7 @@ recs = [
     },
     {
         "icon": "6️⃣",
-        "title": "State-Specific Strategies — One Policy Can't Fit All",
+        "title": "State-Specific Strategies - One Policy Can't Fit All",
         "detail": "There is a large gap between top and bottom performing states. These states need fundamentally different approaches. Southern states need activation strategies. Eastern states need infrastructure. Northeastern states need mobile banking solutions adapted to terrain.",
         "impact": "High", "feasibility": "Medium", "timeline": "Ongoing"
     }
@@ -256,7 +256,7 @@ st.markdown("---")
 st.markdown("## ⬇️ Download Policy Brief")
 
 policy_text = f"""
-PMJDY FINANCIAL INCLUSION — POLICY BRIEF
+PMJDY FINANCIAL INCLUSION - POLICY BRIEF
 Generated: {datetime.now().strftime('%B %Y')}
 Data: Ministry of Finance, GoI (Rajya Sabha Questions, 2022-2024)
 
@@ -279,16 +279,16 @@ SIX RECOMMENDATIONS
 3. Prioritize BC network in ML-identified high-priority districts
 4. Women-specific financial literacy at MGNREGA worksites
 5. Interoperable rural digital payment infrastructure
-6. State-specific strategies — one policy cannot fit all
+6. State-specific strategies - one policy cannot fit all
 
 DATA SOURCES
 ============
-- Rajya Sabha Unstarred Question No. 230 (2024) — Balance distribution
-- Rajya Sabha Unstarred Question No. 239 (2024) — State-wise accounts
-- Rajya Sabha Unstarred Question No. 246 (2022) — Bihar district data
-- Rajya Sabha Unstarred Question No. 2313 (2023) — Karnataka district data
-- Rajya Sabha Unstarred Question No. 886 (2024) — Maharashtra district data
-- pmjdy.gov.in — National statistics
+- Rajya Sabha Unstarred Question No. 230 (2024) - Balance distribution
+- Rajya Sabha Unstarred Question No. 239 (2024) - State-wise accounts
+- Rajya Sabha Unstarred Question No. 246 (2022) - Bihar district data
+- Rajya Sabha Unstarred Question No. 2313 (2023) - Karnataka district data
+- Rajya Sabha Unstarred Question No. 886 (2024) - Maharashtra district data
+- pmjdy.gov.in - National statistics
 """
 
 col1, col2 = st.columns(2)
@@ -315,11 +315,11 @@ st.markdown("""
 | Document | Source | Year |
 |----------|--------|------|
 | PMJDY Progress Report | pmjdy.gov.in | 2024 |
-| RS Q230 — Balance Distribution | Ministry of Finance, Rajya Sabha | 2024 |
-| RS Q239 — State-wise Accounts | Ministry of Finance, Rajya Sabha | 2024 |
-| RS Q246 — Bihar Districts | Ministry of Finance, Rajya Sabha | 2022 |
-| RS Q2313 — Karnataka Districts | Ministry of Finance, Rajya Sabha | 2023 |
-| RS Q886 — Maharashtra Districts | Ministry of Finance, Rajya Sabha | 2024 |
+| RS Q230 - Balance Distribution | Ministry of Finance, Rajya Sabha | 2024 |
+| RS Q239 - State-wise Accounts | Ministry of Finance, Rajya Sabha | 2024 |
+| RS Q246 - Bihar Districts | Ministry of Finance, Rajya Sabha | 2022 |
+| RS Q2313 - Karnataka Districts | Ministry of Finance, Rajya Sabha | 2023 |
+| RS Q886 - Maharashtra Districts | Ministry of Finance, Rajya Sabha | 2024 |
 | World Bank Global Findex | World Bank | 2021 |
 """)
 st.markdown("---")

@@ -7,7 +7,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_state_data
 
-st.set_page_config(page_title="State Analysis — PMJDY", page_icon="📊", layout="wide")
+st.set_page_config(page_title="State Analysis - PMJDY", page_icon="📊", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -34,7 +34,7 @@ with st.sidebar:
         compare_state = st.selectbox("Compare with", [s for s in sorted(df["State"].tolist()) if s != selected_state])
     st.markdown("---")
     st.markdown("**Chart Options**")
-    chart_sort = st.selectbox("National context — sort by",
+    chart_sort = st.selectbox("National context - sort by",
         ["Avg_Balance_INR", "Accounts_Per_1000", "Accounts_Lakh", "Performance_Score"],
         format_func=lambda x: {"Avg_Balance_INR": "Avg Balance", "Accounts_Per_1000": "Coverage/1000",
                                 "Accounts_Lakh": "Total Accounts", "Performance_Score": "Performance Score"}[x])
@@ -48,13 +48,13 @@ with st.sidebar:
 st.markdown("""
 <div class='gov-header'>
     <h1 style='margin:0; font-size:24px;'>📊 State Deep Dive</h1>
-    <p style='margin:5px 0 0 0; opacity:0.9;'>Detailed analysis for any state — accounts, deposits, rankings, and peer comparison</p>
+    <p style='margin:5px 0 0 0; opacity:0.9;'>Detailed analysis for any state - accounts, deposits, rankings, and peer comparison</p>
 </div>
 """, unsafe_allow_html=True)
 
 state_data = df[df["State"] == selected_state].iloc[0]
 
-st.markdown(f"## 📋 {selected_state} — Scorecard")
+st.markdown(f"## 📋 {selected_state} - Scorecard")
 col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Total Accounts", f"{state_data['Accounts']/1e5:.1f} Lakh")
 col2.metric("Total Deposits", f"₹{state_data['Deposit_Crore']:.0f} Cr")
@@ -107,7 +107,7 @@ with col1:
     st.plotly_chart(fig_rank, use_container_width=True)
 
 with col2:
-    st.markdown(f"**{selected_state} — Performance Radar vs National Avg**")
+    st.markdown(f"**{selected_state} - Performance Radar vs National Avg**")
     categories = ["Avg Balance", "Coverage/1000", "Total Accounts", "Deposits", "Perf Score"]
     def norm(val, col):
         mn, mx = df[col].min(), df[col].max()
@@ -125,7 +125,7 @@ st.markdown("---")
 region = state_data["Region"]
 peers = df if show_all_regions else df[df["Region"] == region]
 peer_title = "All States" if show_all_regions else f"{region} Region"
-st.markdown(f"### 🤝 {selected_state} vs {peer_title} Peers — sorted by {label_map.get(peer_metric, peer_metric)}")
+st.markdown(f"### 🤝 {selected_state} vs {peer_title} Peers - sorted by {label_map.get(peer_metric, peer_metric)}")
 
 def highlight_selected(row):
     return ['background-color: #FFF3CD' if row['State'] == selected_state else '' for _ in row]

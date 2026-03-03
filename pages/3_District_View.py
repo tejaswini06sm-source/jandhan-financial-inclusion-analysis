@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_bihar_districts, load_karnataka_districts, load_maharashtra_districts
 from utils.ml_models import detect_anomalies
 
-st.set_page_config(page_title="District Explorer — PMJDY", page_icon="🏘️", layout="wide")
+st.set_page_config(page_title="District Explorer - PMJDY", page_icon="🏘️", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -37,7 +37,7 @@ with st.sidebar:
 st.markdown("""
 <div class='gov-header'>
     <h1 style='margin:0; font-size:24px;'>🏘️ District Explorer</h1>
-    <p style='margin:5px 0 0 0; opacity:0.9;'>Search, compare and analyse districts — Bihar · Karnataka · Maharashtra</p>
+    <p style='margin:5px 0 0 0; opacity:0.9;'>Search, compare and analyse districts - Bihar · Karnataka · Maharashtra</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -49,7 +49,7 @@ if selected_state == "Bihar":
     if district_search:
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
-    st.markdown("### 📍 Bihar — District Analysis")
+    st.markdown("### 📍 Bihar - District Analysis")
     st.markdown("<div class='info-box'>Data: Rajya Sabha Unstarred Question No. 246, 2022.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -74,7 +74,7 @@ if selected_state == "Bihar":
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
-        st.markdown("**Accounts vs Balance — Anomaly Scatter**")
+        st.markdown("**Accounts vs Balance - Anomaly Scatter**")
         anomaly_filter = st.multiselect("Filter anomaly type:", df["Anomaly_Type"].unique().tolist(), default=df["Anomaly_Type"].unique().tolist())
         scatter_df = df[df["Anomaly_Type"].isin(anomaly_filter)]
         fig2 = px.scatter(scatter_df, x="Accounts", y="Avg_Balance_INR", hover_name="District",
@@ -101,7 +101,7 @@ elif selected_state == "Karnataka":
     if district_search:
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
-    st.markdown("### 📍 Karnataka — District Analysis")
+    st.markdown("### 📍 Karnataka - District Analysis")
     st.markdown("<div class='info-box'>Data: Rajya Sabha Unstarred Question No. 2313, 2023.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -120,7 +120,7 @@ elif selected_state == "Karnataka":
     st.markdown("---")
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown(f"**Operative vs Inactive — Top {top_n} Districts**")
+        st.markdown(f"**Operative vs Inactive - Top {top_n} Districts**")
         df_sorted = df_filtered.sort_values("Operative_Pct", ascending=asc).tail(top_n)
         fig = go.Figure()
         fig.add_trace(go.Bar(name="Operative", y=df_sorted["District"], x=df_sorted["Operative_Accounts"], orientation="h", marker_color="#2A9D8F"))
@@ -153,7 +153,7 @@ elif selected_state == "Maharashtra":
     if district_search:
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
-    st.markdown("### 📍 Maharashtra — 4-Year Trend (2022–2024)")
+    st.markdown("### 📍 Maharashtra - 4-Year Trend (2022–2024)")
     st.markdown("<div class='info-box'>Data: Rajya Sabha Unstarred Question No. 886, 2024. 4-point time series: Mar 2022, Mar 2023, Mar 2024, Jun 2024.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -180,7 +180,7 @@ elif selected_state == "Maharashtra":
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
-        st.markdown("**Select District — 4-Year Trend**")
+        st.markdown("**Select District - 4-Year Trend**")
         district_options = sorted(df["District"].tolist())
         selected_district = st.selectbox("Choose District", district_options)
         row = df[df["District"] == selected_district].iloc[0]
@@ -189,7 +189,7 @@ elif selected_state == "Maharashtra":
             "Accounts": [row["Mar_2022"], row["Mar_2023"], row["Mar_2024"], row["Jun_2024"]]
         }).dropna()
         fig2 = px.line(trend_data, x="Period", y="Accounts", markers=True,
-                       title=f"{selected_district} — Account Growth Trend",
+                       title=f"{selected_district} - Account Growth Trend",
                        labels={"Accounts": "PMJDY Accounts", "Period": ""}, height=350)
         fig2.update_traces(line_color="#1F4E79", marker_size=10)
         fig2.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")

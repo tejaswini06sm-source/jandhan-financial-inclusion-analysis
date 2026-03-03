@@ -8,7 +8,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # ─────────────────────────────────────────────────────────────
-# PHASE 1: DATA ENGINEERING — Build the SQLite Database
+# PHASE 1: DATA ENGINEERING - Build the SQLite Database
 # ─────────────────────────────────────────────────────────────
 
 # Create SQLite database engine
@@ -136,7 +136,7 @@ print(f"   → pmjdy_accounts table: {len(df_pmjdy)} rows")
 print(f"   → infrastructure table: {len(df_infra)} rows")
 
 # ─────────────────────────────────────────────────────────────
-# PHASE 2: SQL QUERIES — Extract & Merge
+# PHASE 2: SQL QUERIES - Extract & Merge
 # ─────────────────────────────────────────────────────────────
 
 query = """
@@ -182,7 +182,7 @@ print("="*60)
 corr = df['mgnrega_coverage_pct'].corr(df['avg_balance_inr'])
 print(f"Pearson Correlation: {corr:.3f}")
 print("→ Districts with high MGNREGA coverage show lower average balances")
-print("  Wages deposited and immediately withdrawn — deep cash dependency")
+print("  Wages deposited and immediately withdrawn - deep cash dependency")
 
 print("\n" + "="*60)
 print("FINDING 3: Banking Infrastructure Gap")
@@ -193,7 +193,7 @@ rural_outlets = outlet_gap['Rural']
 gap = urban_outlets / rural_outlets
 print(f"Urban outlets per 1000: {urban_outlets:.2f}")
 print(f"Rural outlets per 1000: {rural_outlets:.2f}")
-print(f"Gap: {gap:.1f}x — Urban has {gap:.1f}x more banking touchpoints")
+print(f"Gap: {gap:.1f}x - Urban has {gap:.1f}x more banking touchpoints")
 
 print("\n" + "="*60)
 print("FINDING 4: State-wise Performance")
@@ -206,7 +206,7 @@ state_summary = df.groupby('state').agg(
 print(state_summary)
 
 # ─────────────────────────────────────────────────────────────
-# PHASE 4: MACHINE LEARNING — District Segmentation
+# PHASE 4: MACHINE LEARNING - District Segmentation
 # ─────────────────────────────────────────────────────────────
 
 from sklearn.preprocessing import StandardScaler
@@ -263,7 +263,7 @@ print("\n── Intervention Tiers ──")
 print(tier_summary)
 
 # ─────────────────────────────────────────────────────────────
-# PHASE 5: VISUALIZATIONS — 4-Panel Dashboard
+# PHASE 5: VISUALIZATIONS - 4-Panel Dashboard
 # ─────────────────────────────────────────────────────────────
 
 colors = {
@@ -280,7 +280,7 @@ tier_colors = {
 
 fig, axes = plt.subplots(2, 2, figsize=(18, 14))
 fig.suptitle(
-    'Why Are Jan Dhan Accounts Lying Empty?\nDistrict-Level Financial Inclusion Analysis — India',
+    'Why Are Jan Dhan Accounts Lying Empty?\nDistrict-Level Financial Inclusion Analysis - India',
     fontsize=16, fontweight='bold', y=1.03
 )
 
@@ -312,7 +312,7 @@ p = np.poly1d(z)
 x_line = np.linspace(df['mgnrega_coverage_pct'].min(),
                      df['mgnrega_coverage_pct'].max(), 100)
 ax2.plot(x_line, p(x_line), 'gray', linestyle='--', linewidth=1.5, alpha=0.7)
-ax2.set_title(f'MGNREGA Coverage vs Avg Account Balance\n(r = {corr:.2f}  — cash dependency effect)',
+ax2.set_title(f'MGNREGA Coverage vs Avg Account Balance\n(r = {corr:.2f}  - cash dependency effect)',
               fontweight='bold', pad=10)
 ax2.set_xlabel('MGNREGA Coverage (%)')
 ax2.set_ylabel('Avg Balance (INR)')
@@ -359,7 +359,7 @@ for text in texts:
 for autotext in autotexts:
     autotext.set_fontweight('bold')
     autotext.set_color('white')
-ax4.set_title('District Intervention Tiers\n(ML Clustering — 3 Priority Groups)',
+ax4.set_title('District Intervention Tiers\n(ML Clustering - 3 Priority Groups)',
               fontweight='bold', pad=10)
 
 plt.tight_layout(pad=4.0)
@@ -369,33 +369,33 @@ plt.show()
 print("\n✅ Dashboard saved: financial_inclusion_dashboard.png")
 
 # ─────────────────────────────────────────────────────────────
-# PHASE 6: POLICY BRIEF — Print to Console
+# PHASE 6: POLICY BRIEF - Print to Console
 # ─────────────────────────────────────────────────────────────
 
 print("\n" + "="*60)
 print("POLICY BRIEF: 3 RECOMMENDATIONS FOR GOVERNMENT")
 print("="*60)
 print(f"""
-FINDING 1 — Account Activation, Not Opening, Is the Crisis
+FINDING 1 - Account Activation, Not Opening, Is the Crisis
   Rural districts show {ratio:.1f}x higher zero-balance rates than urban.
   India has succeeded at opening accounts. The failure is activation.
   RECOMMENDATION: Shift PM Jan Dhan targets from accounts opened
   to accounts actively transacting. Incentivize Business Correspondents
   per active account, not per account opened.
 
-FINDING 2 — MGNREGA Wages Are Reinforcing Cash Dependency
+FINDING 2 - MGNREGA Wages Are Reinforcing Cash Dependency
   Correlation of {corr:.2f} between MGNREGA coverage and average balance.
   Districts with highest rural employment coverage show lowest balances
-  — wages arrive and are immediately withdrawn.
+  - wages arrive and are immediately withdrawn.
   RECOMMENDATION: Mandate DBT payment cycles that keep a minimum
   balance in-account for 7 days. Pair with in-village financial
   literacy camps at MGNREGA worksites.
 
-FINDING 3 — 4x Infrastructure Gap Requires Targeted BC Expansion
+FINDING 3 - 4x Infrastructure Gap Requires Targeted BC Expansion
   Urban areas have {gap:.1f}x more banking outlets per capita than rural.
   This is the single biggest structural barrier to inclusion.
   RECOMMENDATION: Use this district segmentation model to prioritize
-  BC network expansion in High Priority tier districts first — where
+  BC network expansion in High Priority tier districts first - where
   infrastructure deficit and zero-balance rates are both highest.
   Estimated 8-12 districts qualify for immediate intervention.
 """)

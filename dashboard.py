@@ -68,7 +68,7 @@ st.markdown("""
         🏦 Why Are Jan Dhan Accounts Lying Empty?
     </h1>
     <p style='color:#555; font-size:18px; margin-top:4px'>
-        District-Level Financial Inclusion Analysis — India
+        District-Level Financial Inclusion Analysis - India
     </p>
     <hr style='border:1px solid #1F4E79'>
 """, unsafe_allow_html=True)
@@ -206,7 +206,7 @@ with col1:
     plt.close()
 
 with col2:
-    st.markdown("#### ML District Segmentation — Intervention Tiers")
+    st.markdown("#### ML District Segmentation - Intervention Tiers")
     fig, ax = plt.subplots(figsize=(6, 5))
     tier_counts = filtered_df['intervention_tier'].value_counts()
     wedge_colors = [tier_colors.get(t, '#888') for t in tier_counts.index]
@@ -267,7 +267,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.error("""
-    **Finding 1 — Activation Gap**
+    **Finding 1 - Activation Gap**
 
     Rural districts show **2.3x higher** zero-balance
     rates than urban. India is succeeding at opening
@@ -281,7 +281,7 @@ with col1:
 
 with col2:
     st.warning("""
-    **Finding 2 — Cash Dependency**
+    **Finding 2 - Cash Dependency**
 
     Correlation of **-0.964** between MGNREGA
     coverage and average balance. Wages arrive
@@ -295,7 +295,7 @@ with col2:
 
 with col3:
     st.success("""
-    **Finding 3 — Infrastructure Gap**
+    **Finding 3 - Infrastructure Gap**
 
     Urban areas have **5.1x more** banking
     outlets per capita than rural districts.

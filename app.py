@@ -58,7 +58,7 @@ st.markdown("""
 <div class='gov-header'>
     <h1 style='margin:0; font-size:28px;'>🏦 Pradhan Mantri Jan Dhan Yojana</h1>
     <h2 style='margin:5px 0 0 0; font-size:18px; font-weight:400; opacity:0.9;'>
-        Financial Inclusion Analysis Dashboard — India
+        Financial Inclusion Analysis Dashboard - India
     </h2>
     <p style='margin:8px 0 0 0; font-size:13px; opacity:0.8;'>
         Real data from Ministry of Finance · 36 States & UTs · 104 Districts (Bihar, Karnataka, Maharashtra)
@@ -67,9 +67,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════
-# WHAT IS PMJDY — INTRO
+# WHAT IS PMJDY - INTRO
 # ══════════════════════════════════════════════
-with st.expander("📖 What is PMJDY? — Click to read", expanded=True):
+with st.expander("📖 What is PMJDY? - Click to read", expanded=True):
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown("""
@@ -81,46 +81,46 @@ with st.expander("📖 What is PMJDY? — Click to read", expanded=True):
         - ✅ Zero-balance savings account
         - ✅ RuPay debit card with ₹2 lakh accident insurance
         - ✅ ₹10,000 overdraft facility (for active accounts)
-        - ✅ Direct Benefit Transfer (DBT) — government subsidies directly to account
+        - ✅ Direct Benefit Transfer (DBT) - government subsidies directly to account
         - ✅ Access to micro-insurance & pension schemes
 
         **Why it matters:** Before PMJDY, over 40% of Indian adults had no bank account.
-        Cash-based welfare was leaky — money meant for the poor was lost to middlemen.
+        Cash-based welfare was leaky - money meant for the poor was lost to middlemen.
         PMJDY was designed to fix that by making every citizen a direct recipient.
 
         **The challenge this dashboard examines:** Opening accounts is easy.
         *Keeping them active* is hard. A large proportion of PMJDY accounts remain
-        zero-balance — money goes in (wages, subsidies) and comes straight out.
+        zero-balance - money goes in (wages, subsidies) and comes straight out.
         This dashboard asks: **why, and where?**
         """)
     with col2:
         st.markdown("""
         **Key Milestones**
 
-        🗓️ **Aug 2014** — PMJDY launched
+        🗓️ **Aug 2014** - PMJDY launched
 
-        🗓️ **2015** — 17.5 crore accounts opened in first year
+        🗓️ **2015** - 17.5 crore accounts opened in first year
 
-        🗓️ **2018** — Overdraft limit doubled to ₹10,000
+        🗓️ **2018** - Overdraft limit doubled to ₹10,000
 
-        🗓️ **2020** — COVID relief via DBT to PMJDY accounts
+        🗓️ **2020** - COVID relief via DBT to PMJDY accounts
 
-        🗓️ **2022** — Extended to 2025
+        🗓️ **2022** - Extended to 2025
 
-        🗓️ **2024** — 45.8 crore accounts, ₹2.31 lakh crore deposits
+        🗓️ **2024** - 45.8 crore accounts, ₹2.31 lakh crore deposits
 
         ---
         **Global Context**
 
         India's financial inclusion rate jumped from **53%** (2014) to **80%+** (2024)
-        — one of the fastest expansions globally.
+        - one of the fastest expansions globally.
         """)
 
 # ══════════════════════════════════════════════
 # NATIONAL KPI STRIP
 # ══════════════════════════════════════════════
 st.markdown("---")
-st.markdown("### 📊 National Snapshot — As of 2024")
+st.markdown("### 📊 National Snapshot - As of 2024")
 
 total_accounts = df["Accounts"].sum()
 total_deposit = df["Deposit_Crore"].sum()
@@ -213,7 +213,7 @@ with col1:
     See all 36 states ranked, mapped, and compared. Find which regions are leading and which are lagging.
 
     **📊 State Analysis**
-    Deep dive into any individual state — accounts, deposits, per capita performance, and peer comparison.
+    Deep dive into any individual state - accounts, deposits, per capita performance, and peer comparison.
     """)
 with col2:
     st.markdown("""
@@ -233,11 +233,11 @@ with col1:
     st.markdown("""
     <div class='info-box'>
         <b>👥 Who is this for?</b><br><br>
-        🏛️ <b>Policy Researchers</b> — Understand where financial inclusion is working and where it isn't<br>
-        📰 <b>Journalists</b> — Data-backed stories on India's banking access gap<br>
-        🎓 <b>Students & Academics</b> — Real government data for research and analysis<br>
-        🏦 <b>Banking Professionals</b> — Identify underserved districts for branch/BC expansion<br>
-        🧑‍💼 <b>Government Officials</b> — Monitor PMJDY progress at state and district level
+        🏛️ <b>Policy Researchers</b> - Understand where financial inclusion is working and where it isn't<br>
+        📰 <b>Journalists</b> - Data-backed stories on India's banking access gap<br>
+        🎓 <b>Students & Academics</b> - Real government data for research and analysis<br>
+        🏦 <b>Banking Professionals</b> - Identify underserved districts for branch/BC expansion<br>
+        🧑‍💼 <b>Government Officials</b> - Monitor PMJDY progress at state and district level
     </div>
     """, unsafe_allow_html=True)
 with col2:

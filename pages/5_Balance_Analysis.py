@@ -7,7 +7,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_balance_distribution, load_state_data, load_bihar_districts
 
-st.set_page_config(page_title="Balance Analysis — PMJDY", page_icon="💰", layout="wide")
+st.set_page_config(page_title="Balance Analysis - PMJDY", page_icon="💰", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -64,7 +64,7 @@ filtered_bihar = filtered_bihar[filtered_bihar["Avg_Balance_INR"].between(bihar_
 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>💰 Balance Analysis — What's Actually in the Accounts?</h1>
+    <h1 style='margin:0; font-size:24px;'>💰 Balance Analysis - What's Actually in the Accounts?</h1>
     <p style='margin:5px 0 0 0; opacity:0.9;'>Are PMJDY accounts holding money, or just sitting empty?</p>
 </div>
 """, unsafe_allow_html=True)
@@ -100,7 +100,7 @@ if active:
 st.markdown("---")
 
 # ── BALANCE DISTRIBUTION ──
-st.markdown("### 📊 Balance Slab Distribution — National")
+st.markdown("### 📊 Balance Slab Distribution - National")
 st.markdown("<p class='source-tag'>Source: Rajya Sabha Unstarred Question No. 230, 2024</p>", unsafe_allow_html=True)
 
 slab_filter = st.multiselect("Filter slabs:", balance_dist["Particulars"].tolist(), default=balance_dist["Particulars"].tolist())
@@ -127,7 +127,7 @@ with col2:
 st.markdown("---")
 
 # ── STATE BALANCE COMPARISON ──
-st.markdown(f"### 🗺️ State-wise Avg Balance — {len(filtered_states)} States")
+st.markdown(f"### 🗺️ State-wise Avg Balance - {len(filtered_states)} States")
 
 nat_avg = state_df["Deposit_Crore"].sum() * 1e7 / state_df["Accounts"].sum()
 color_state_by = st.radio("Color state chart by:", ["Region", "Tier"] if "Tier" in filtered_states.columns else ["Region"], horizontal=True)
@@ -147,8 +147,8 @@ with col1:
 
 with col2:
     st.markdown("**Key Stats**")
-    st.markdown(f"🟢 **Best:** {filtered_states.loc[filtered_states['Avg_Balance_INR'].idxmax(), 'State']} — ₹{filtered_states['Avg_Balance_INR'].max():,.0f}")
-    st.markdown(f"🔴 **Lowest:** {filtered_states.loc[filtered_states['Avg_Balance_INR'].idxmin(), 'State']} — ₹{filtered_states['Avg_Balance_INR'].min():,.0f}")
+    st.markdown(f"🟢 **Best:** {filtered_states.loc[filtered_states['Avg_Balance_INR'].idxmax(), 'State']} - ₹{filtered_states['Avg_Balance_INR'].max():,.0f}")
+    st.markdown(f"🔴 **Lowest:** {filtered_states.loc[filtered_states['Avg_Balance_INR'].idxmin(), 'State']} - ₹{filtered_states['Avg_Balance_INR'].min():,.0f}")
     st.markdown(f"📊 **Filtered avg:** ₹{filtered_states['Avg_Balance_INR'].mean():,.0f}")
     st.markdown(f"📊 **National avg:** ₹{nat_avg:,.0f}")
     spread = filtered_states['Avg_Balance_INR'].max() / filtered_states['Avg_Balance_INR'].min()
@@ -157,7 +157,7 @@ with col2:
 st.markdown("---")
 
 # ── BIHAR DISTRICT BALANCE ──
-st.markdown(f"### 📍 Bihar District Balance — {len(filtered_bihar)} Districts")
+st.markdown(f"### 📍 Bihar District Balance - {len(filtered_bihar)} Districts")
 st.markdown("<div class='info-box'>Bihar has the most PMJDY accounts but among the lowest balances. District-level view shows extreme variation within the state.</div>", unsafe_allow_html=True)
 
 bihar_sort = st.radio("Sort Bihar chart by:", ["Avg_Balance_INR", "Accounts", "Balance_Crore"], horizontal=True,
@@ -203,13 +203,13 @@ highlight_india = st.checkbox("Highlight India", value=True)
 col1, col2 = st.columns(2)
 with col1:
     fig6 = px.bar(global_data.sort_values("Account_Ownership_Pct"), x="Account_Ownership_Pct", y="Country",
-                  orientation="h", color="Type", title="Account Ownership % — Global",
+                  orientation="h", color="Type", title="Account Ownership % - Global",
                   labels={"Account_Ownership_Pct": "Adults with Bank Account (%)", "Country": ""}, height=330)
     fig6.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
     st.plotly_chart(fig6, use_container_width=True)
 with col2:
     fig7 = px.bar(global_data.sort_values("Avg_Balance_USD"), x="Avg_Balance_USD", y="Country",
-                  orientation="h", color="Type", title="Avg Balance (USD) — Global",
+                  orientation="h", color="Type", title="Avg Balance (USD) - Global",
                   labels={"Avg_Balance_USD": "Avg Balance per Account (USD)", "Country": ""}, height=330)
     fig7.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
     st.plotly_chart(fig7, use_container_width=True)

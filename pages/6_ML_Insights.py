@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_state_data, load_maharashtra_districts
 from utils.ml_models import cluster_states, predict_underperformers, growth_predictor, detect_anomalies
 
-st.set_page_config(page_title="ML Insights — PMJDY", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="ML Insights - PMJDY", page_icon="🤖", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -32,7 +32,7 @@ with st.sidebar:
 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>🤖 ML Insights — Machine Learning on PMJDY Data</h1>
+    <h1 style='margin:0; font-size:24px;'>🤖 ML Insights - Machine Learning on PMJDY Data</h1>
     <p style='margin:5px 0 0 0; opacity:0.9;'>K-Means clustering · Growth prediction · Anomaly detection · Underperformance identification</p>
 </div>
 """, unsafe_allow_html=True)
@@ -41,7 +41,7 @@ st.markdown("""
 <div class='info-box'>
 <b>What this section does:</b> Applies unsupervised machine learning (K-Means clustering),
 linear regression for growth prediction, z-score anomaly detection, and rule-based underperformance
-identification — all on real government data. Each model is explained in plain English.
+identification - all on real government data. Each model is explained in plain English.
 </div>
 """, unsafe_allow_html=True)
 
@@ -50,10 +50,10 @@ tabs = st.tabs(["🎯 State Clustering", "⚠️ Underperformers", "📈 Growth 
 
 # ══ TAB 1: CLUSTERING ══
 with tabs[0]:
-    st.markdown("### 🎯 K-Means State Clustering — Performance Tiers")
+    st.markdown("### 🎯 K-Means State Clustering - Performance Tiers")
     st.markdown("""
     **Method:** K-Means (k=3) applied to accounts per 1000 population + avg balance + performance score.
-    States are grouped into 3 natural clusters based on their actual data — not manual categorization.
+    States are grouped into 3 natural clusters based on their actual data - not manual categorization.
     """)
 
     tier_colors = {"High Performer": "#2A9D8F", "Developing": "#F4A261", "Needs Attention": "#E76F51"}
@@ -66,7 +66,7 @@ with tabs[0]:
             hover_name="State",
             color_discrete_map=tier_colors,
             labels={"Accounts_Per_1000": "Accounts per 1,000 Population", "Avg_Balance_INR": "Avg Balance (₹)"},
-            height=450, title="State Clusters — Coverage vs Balance"
+            height=450, title="State Clusters - Coverage vs Balance"
         )
         fig.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
         st.plotly_chart(fig, use_container_width=True)
@@ -99,7 +99,7 @@ with tabs[0]:
 
 # ══ TAB 2: UNDERPERFORMERS ══
 with tabs[1]:
-    st.markdown("### ⚠️ Underperformance Analysis — States Not Meeting Their Potential")
+    st.markdown("### ⚠️ Underperformance Analysis - States Not Meeting Their Potential")
     st.markdown("""
     **Method:** A state is considered underperforming if its actual accounts are below 45% of its projected population
     (a reasonable financial inclusion target for a state's adult population).
@@ -114,7 +114,7 @@ with tabs[1]:
 
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown("**States Underperforming — Coverage Gap**")
+        st.markdown("**States Underperforming - Coverage Gap**")
         fig = px.bar(
             under_df.head(15).sort_values("Gap_Lakh"),
             x="Gap_Lakh", y="State",
@@ -145,7 +145,7 @@ with tabs[1]:
 
 # ══ TAB 3: GROWTH PREDICTOR ══
 with tabs[2]:
-    st.markdown("### 📈 Growth Rate Predictor — Maharashtra Districts")
+    st.markdown("### 📈 Growth Rate Predictor - Maharashtra Districts")
     st.markdown("""
     **Method:** Linear regression fitted on 3 data points (March 2022, 2023, 2024) per district.
     Projects the annual growth rate and estimates when each district will reach 120% of current accounts (proxy for saturation).
@@ -202,9 +202,9 @@ with tabs[2]:
 
 # ══ TAB 4: ANOMALY DETECTION ══
 with tabs[3]:
-    st.markdown("### 🔍 Anomaly Detection — Which States Behave Unusually?")
+    st.markdown("### 🔍 Anomaly Detection - Which States Behave Unusually?")
     st.markdown("""
-    **Method:** Z-score standardization. States with |z-score| > 2 are flagged as anomalies —
+    **Method:** Z-score standardization. States with |z-score| > 2 are flagged as anomalies -
     meaning they are more than 2 standard deviations from the mean in accounts or balance.
     These deserve special investigation.
     """)
@@ -223,7 +223,7 @@ with tabs[3]:
             size="Accounts",
             hover_data={"Z_Score": ":.2f", "Region": True},
             height=450,
-            title="States by Account Volume — Anomalies Highlighted"
+            title="States by Account Volume - Anomalies Highlighted"
         )
         fig.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white",
                           xaxis_tickangle=-45)
@@ -239,7 +239,7 @@ with tabs[3]:
             size="Avg_Balance_INR",
             hover_data={"Z_Score": ":.2f", "Region": True},
             height=450,
-            title="States by Avg Balance — Anomalies Highlighted"
+            title="States by Avg Balance - Anomalies Highlighted"
         )
         fig2.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white",
                            xaxis_tickangle=-45)
@@ -251,9 +251,9 @@ with tabs[3]:
         st.dataframe(flagged.reset_index(drop=True), use_container_width=True, hide_index=True)
         with st.expander("📖 Why are these states anomalous?"):
             st.markdown("""
-            - **Large states** like UP, Bihar, West Bengal naturally appear as high-account anomalies — they have enormous populations
-            - **Small UTs** like Lakshadweep, Andaman appear as low-account anomalies — tiny populations
-            - These aren't necessarily problems — they're structural features of India's demographic diversity
+            - **Large states** like UP, Bihar, West Bengal naturally appear as high-account anomalies - they have enormous populations
+            - **Small UTs** like Lakshadweep, Andaman appear as low-account anomalies - tiny populations
+            - These aren't necessarily problems - they're structural features of India's demographic diversity
             - What's more concerning is states with anomalously LOW average balances relative to their size
             """)
 

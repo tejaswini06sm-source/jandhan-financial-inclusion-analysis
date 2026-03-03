@@ -3,7 +3,7 @@ import sys, os
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-st.set_page_config(page_title="About — PMJDY Dashboard", page_icon="ℹ️", layout="wide")
+st.set_page_config(page_title="About - PMJDY Dashboard", page_icon="ℹ️", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -29,11 +29,11 @@ with col1:
     st.markdown("### 👩‍💻 About the Project")
     st.markdown("""
     This dashboard was built as an independent data analysis project examining
-    India's flagship financial inclusion program — PMJDY — using **real, publicly available
+    India's flagship financial inclusion program - PMJDY - using **real, publicly available
     government data** from Ministry of Finance and Rajya Sabha records.
 
     **Purpose:** To move beyond headline numbers and examine *where* financial inclusion
-    is working, *where* it isn't, and *why* — using data science and machine learning.
+    is working, *where* it isn't, and *why* - using data science and machine learning.
 
     **Builder:** Tejaswini Shidheshwar Mathpati
 
@@ -95,7 +95,7 @@ with col1:
 
     **4. Population projections are estimates**
     Per-capita calculations use projected 2024 populations based on
-    2011 Census growth rates — these are estimates, not actual counts.
+    2011 Census growth rates - these are estimates, not actual counts.
 
     **5. Global comparisons are approximate**
     World Bank Global Findex 2021 data used for global benchmarking

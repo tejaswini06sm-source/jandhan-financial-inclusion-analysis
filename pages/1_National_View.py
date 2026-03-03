@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_state_data
 from utils.ml_models import cluster_states, predict_underperformers
 
-st.set_page_config(page_title="National View — PMJDY", page_icon="🗺️", layout="wide")
+st.set_page_config(page_title="National View - PMJDY", page_icon="🗺️", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -98,7 +98,7 @@ if show_underperforming and "Underperforming" in filtered.columns:
 # ── HEADER ──
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>🗺️ National View — All 36 States & UTs</h1>
+    <h1 style='margin:0; font-size:24px;'>🗺️ National View - All 36 States & UTs</h1>
     <p style='margin:5px 0 0 0; opacity:0.9;'>Complete state-wise PMJDY performance across India</p>
 </div>
 """, unsafe_allow_html=True)
@@ -114,7 +114,7 @@ if accounts_range != (acc_min, acc_max): active.append(f"Accounts: {accounts_ran
 if show_underperforming: active.append("Underperforming only")
 
 if active:
-    st.markdown(f"<div class='info-box'>🔽 <b>Active filters:</b> {' · '.join(active)} — showing <b>{len(filtered)}</b> of <b>{len(df)}</b> states</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='info-box'>🔽 <b>Active filters:</b> {' · '.join(active)} - showing <b>{len(filtered)}</b> of <b>{len(df)}</b> states</div>", unsafe_allow_html=True)
 
 # ── KPIs ──
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -141,8 +141,8 @@ label_map = {
     "Deposit_Crore": "Total Deposits (Crore)"
 }
 
-st.markdown(f"#### 🏆 State Rankings — {label_map[sort_by]}")
-st.markdown("<div class='info-box'>This shows how many PMJDY accounts exist per 1,000 people in each state — a fairer comparison than raw totals, which favour large states.</div>", unsafe_allow_html=True)
+st.markdown(f"#### 🏆 State Rankings - {label_map[sort_by]}")
+st.markdown("<div class='info-box'>This shows how many PMJDY accounts exist per 1,000 people in each state - a fairer comparison than raw totals, which favour large states.</div>", unsafe_allow_html=True)
 
 fig = px.bar(
     filtered.sort_values(sort_by),
@@ -164,13 +164,13 @@ with st.expander("📖 What does this mean?"):
     - States above **200 accounts per 1,000** are considered high-coverage areas
     - Small UTs like **Andaman & Nicobar** show very high per-capita numbers due to tiny populations
     - Large states like **UP and Bihar** have lower per-capita rates despite the most total accounts
-    - **Kerala and Goa** stand out as genuine high performers — high coverage AND high average balances
+    - **Kerala and Goa** stand out as genuine high performers - high coverage AND high average balances
     """)
 
 st.markdown("---")
 
 # ── CHART 2: Scatter ──
-st.markdown("#### 💰 Total Accounts vs Average Balance — Who's Really Winning?")
+st.markdown("#### 💰 Total Accounts vs Average Balance - Who's Really Winning?")
 st.markdown("<div class='info-box'>A state can have millions of accounts but tiny balances. This reveals which states have both quantity AND quality.</div>", unsafe_allow_html=True)
 
 color_by = st.radio("Color scatter by:", ["Region", "Tier"], horizontal=True)

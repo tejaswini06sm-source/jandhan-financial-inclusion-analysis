@@ -7,7 +7,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_karnataka_districts, load_state_data
 
-st.set_page_config(page_title="Gender Analysis — PMJDY", page_icon="👥", layout="wide")
+st.set_page_config(page_title="Gender Analysis - PMJDY", page_icon="👥", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -37,7 +37,7 @@ with st.sidebar:
 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>👥 Gender Analysis — Female Financial Inclusion</h1>
+    <h1 style='margin:0; font-size:24px;'>👥 Gender Analysis - Female Financial Inclusion</h1>
     <p style='margin:5px 0 0 0; opacity:0.9;'>Who holds PMJDY accounts? Are women being left behind?</p>
 </div>
 """, unsafe_allow_html=True)
@@ -61,13 +61,13 @@ men_accounts = total_accounts - women_accounts
 col1, col2, col3 = st.columns(3)
 col1.metric("Women Account Holders", f"{women_accounts/1e7:.1f} Cr", "~54% of all accounts")
 col2.metric("Men Account Holders", f"{men_accounts/1e7:.1f} Cr", "~46% of all accounts")
-col3.metric("Women's Share", "54.2%", "Exceeds 50% — positive sign")
+col3.metric("Women's Share", "54.2%", "Exceeds 50% - positive sign")
 
 fig_donut = go.Figure(data=[go.Pie(
     labels=["Women", "Men"], values=[women_accounts, men_accounts],
     hole=0.5, marker_colors=["#E84393", "#1F4E79"], textinfo="label+percent"
 )])
-fig_donut.update_layout(title="National Gender Split — PMJDY Account Holders", paper_bgcolor="white", height=320,
+fig_donut.update_layout(title="National Gender Split - PMJDY Account Holders", paper_bgcolor="white", height=320,
     annotations=[dict(text="45.8 Cr<br>Total", x=0.5, y=0.5, font_size=14, showarrow=False)])
 st.plotly_chart(fig_donut, use_container_width=True)
 
@@ -86,9 +86,9 @@ if district_search: active.append(f"Search: '{district_search}'")
 if female_range != (0, 100): active.append(f"Female %: {female_range[0]}–{female_range[1]}")
 if operative_range != (0, 100): active.append(f"Operative %: {operative_range[0]}–{operative_range[1]}")
 if active:
-    st.markdown(f"<div class='info-box'>🔽 <b>Active filters:</b> {' · '.join(active)} — showing <b>{len(df)}</b> of <b>{len(karnataka)}</b> districts</div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='info-box'>🔽 <b>Active filters:</b> {' · '.join(active)} - showing <b>{len(df)}</b> of <b>{len(karnataka)}</b> districts</div>", unsafe_allow_html=True)
 
-st.markdown(f"### 📍 Karnataka District Gender Analysis — {len(df)} Districts")
+st.markdown(f"### 📍 Karnataka District Gender Analysis - {len(df)} Districts")
 
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total Accounts", f"{df['Total_Accounts'].sum()/1e5:.0f} Lakh")
@@ -110,7 +110,7 @@ with col1:
     st.plotly_chart(fig, use_container_width=True)
 
 with col2:
-    st.markdown(f"**Male vs Female — Top {top_n} Districts by Total Accounts**")
+    st.markdown(f"**Male vs Female - Top {top_n} Districts by Total Accounts**")
     top15 = df.nlargest(top_n, "Total_Accounts").sort_values("Total_Accounts", ascending=asc)
     fig2 = go.Figure()
     fig2.add_trace(go.Bar(name="Female", y=top15["District"], x=top15["Female_Accounts"], orientation="h", marker_color="#E84393"))
@@ -119,7 +119,7 @@ with col2:
     st.plotly_chart(fig2, use_container_width=True)
 
 st.markdown("---")
-st.markdown("### 🔄 Female Share vs Operative Rate — Access vs Agency")
+st.markdown("### 🔄 Female Share vs Operative Rate - Access vs Agency")
 st.markdown("<div class='info-box'>Do districts with more women's accounts have more or less active usage?</div>", unsafe_allow_html=True)
 
 color_scatter = st.radio("Color scatter by:", ["Inactive_Pct", "Operative_Pct", "Total_Accounts"], horizontal=True,
