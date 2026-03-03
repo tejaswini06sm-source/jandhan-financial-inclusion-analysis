@@ -32,7 +32,7 @@ with st.sidebar:
     top_n = st.slider("Show Top N districts in charts", min_value=5, max_value=38, value=10, step=5)
     sort_direction = st.radio("Sort order", ["Descending", "Ascending"], horizontal=True)
     st.markdown("---")
-    st.markdown("<div class='info-box'><small>District data: Bihar (38), Karnataka (30), Maharashtra (36)</small></div>", unsafe_allow_html=True)
+    st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'><small>District data: Bihar (38), Karnataka (30), Maharashtra (36)</small></div>", unsafe_allow_html=True)
 
 st.markdown("""
 <div class='gov-header'>
@@ -50,7 +50,7 @@ if selected_state == "Bihar":
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
     st.markdown("### 📍 Bihar - District Analysis")
-    st.markdown("<div class='info-box'>Data: Rajya Sabha Unstarred Question No. 246, 2022.</div>", unsafe_allow_html=True)
+    st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Data: Rajya Sabha Unstarred Question No. 246, 2022.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Districts Shown", len(df))
@@ -102,7 +102,7 @@ elif selected_state == "Karnataka":
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
     st.markdown("### 📍 Karnataka - District Analysis")
-    st.markdown("<div class='info-box'>Data: Rajya Sabha Unstarred Question No. 2313, 2023.</div>", unsafe_allow_html=True)
+    st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Data: Rajya Sabha Unstarred Question No. 2313, 2023.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Districts Shown", len(df))
@@ -154,7 +154,7 @@ elif selected_state == "Maharashtra":
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
     st.markdown("### 📍 Maharashtra - 4-Year Trend (2022–2024)")
-    st.markdown("<div class='info-box'>Data: Rajya Sabha Unstarred Question No. 886, 2024. 4-point time series: Mar 2022, Mar 2023, Mar 2024, Jun 2024.</div>", unsafe_allow_html=True)
+    st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Data: Rajya Sabha Unstarred Question No. 886, 2024. 4-point time series: Mar 2022, Mar 2023, Mar 2024, Jun 2024.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Districts Shown", len(df))

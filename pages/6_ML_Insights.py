@@ -38,7 +38,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<div class='info-box'>
+<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>
 <b>What this section does:</b> Applies unsupervised machine learning (K-Means clustering),
 linear regression for growth prediction, z-score anomaly detection, and rule-based underperformance
 identification - all on real government data. Each model is explained in plain English.

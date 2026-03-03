@@ -231,7 +231,7 @@ st.markdown("---")
 col1, col2 = st.columns([2,1])
 with col1:
     st.markdown("""
-    <div class='info-box'>
+    <div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>
         <b>👥 Who is this for?</b><br><br>
         🏛️ <b>Policy Researchers</b> - Understand where financial inclusion is working and where it isn't<br>
         📰 <b>Journalists</b> - Data-backed stories on India's banking access gap<br>

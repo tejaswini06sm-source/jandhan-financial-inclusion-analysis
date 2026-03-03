@@ -114,7 +114,7 @@ if accounts_range != (acc_min, acc_max): active.append(f"Accounts: {accounts_ran
 if show_underperforming: active.append("Underperforming only")
 
 if active:
-    st.markdown(f"<div class='info-box'>🔽 <b>Active filters:</b> {' · '.join(active)} - showing <b>{len(filtered)}</b> of <b>{len(df)}</b> states</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>🔽 <b>Active filters:</b> {' · '.join(active)} - showing <b>{len(filtered)}</b> of <b>{len(df)}</b> states</div>", unsafe_allow_html=True)
 
 # ── KPIs ──
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -142,7 +142,7 @@ label_map = {
 }
 
 st.markdown(f"#### 🏆 State Rankings - {label_map[sort_by]}")
-st.markdown("<div class='info-box'>This shows how many PMJDY accounts exist per 1,000 people in each state - a fairer comparison than raw totals, which favour large states.</div>", unsafe_allow_html=True)
+st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>This shows how many PMJDY accounts exist per 1,000 people in each state - a fairer comparison than raw totals, which favour large states.</div>", unsafe_allow_html=True)
 
 fig = px.bar(
     filtered.sort_values(sort_by),
@@ -171,7 +171,7 @@ st.markdown("---")
 
 # ── CHART 2: Scatter ──
 st.markdown("#### 💰 Total Accounts vs Average Balance - Who's Really Winning?")
-st.markdown("<div class='info-box'>A state can have millions of accounts but tiny balances. This reveals which states have both quantity AND quality.</div>", unsafe_allow_html=True)
+st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>A state can have millions of accounts but tiny balances. This reveals which states have both quantity AND quality.</div>", unsafe_allow_html=True)
 
 color_by = st.radio("Color scatter by:", ["Region", "Tier"], horizontal=True)
 
@@ -247,7 +247,7 @@ if show_cols:
 if "Underperforming" in filtered.columns:
     st.markdown("---")
     st.markdown("#### ⚠️ Coverage Gap Analysis")
-    st.markdown("<div class='info-box'>Assuming a 45% target coverage of population, this shows how many more accounts each state needs to open.</div>", unsafe_allow_html=True)
+    st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Assuming a 45% target coverage of population, this shows how many more accounts each state needs to open.</div>", unsafe_allow_html=True)
     gap_cols = [c for c in ["State", "Region", "Coverage_Pct", "Gap_Lakh", "Tier"] if c in filtered.columns]
     gap_df = filtered[filtered["Underperforming"] == True][gap_cols].sort_values("Gap_Lakh", ascending=False).reset_index(drop=True)
     gap_df.index = gap_df.index + 1

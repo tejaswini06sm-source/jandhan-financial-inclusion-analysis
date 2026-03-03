@@ -70,7 +70,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<div class='info-box'>
+<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>
 <b>The activation paradox:</b> India has opened 45+ crore PMJDY accounts. But the average balance is just ₹3,703.
 Money comes in (wages, subsidies) and leaves within days. This section examines the depth of that problem.
 </div>
@@ -95,7 +95,7 @@ active = []
 if len(region_filter) < len(regions): active.append(f"Regions: {', '.join(region_filter)}")
 if bal_range != (bal_min, bal_max): active.append(f"Balance: ₹{bal_range[0]:,}–₹{bal_range[1]:,}")
 if active:
-    st.markdown(f"<div class='info-box'>🔽 <b>Active filters:</b> {' · '.join(active)}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>🔽 <b>Active filters:</b> {' · '.join(active)}</div>", unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -158,7 +158,7 @@ st.markdown("---")
 
 # ── BIHAR DISTRICT BALANCE ──
 st.markdown(f"### 📍 Bihar District Balance - {len(filtered_bihar)} Districts")
-st.markdown("<div class='info-box'>Bihar has the most PMJDY accounts but among the lowest balances. District-level view shows extreme variation within the state.</div>", unsafe_allow_html=True)
+st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Bihar has the most PMJDY accounts but among the lowest balances. District-level view shows extreme variation within the state.</div>", unsafe_allow_html=True)
 
 bihar_sort = st.radio("Sort Bihar chart by:", ["Avg_Balance_INR", "Accounts", "Balance_Crore"], horizontal=True,
                        format_func=lambda x: {"Avg_Balance_INR": "Avg Balance", "Accounts": "Total Accounts", "Balance_Crore": "Total Balance"}[x])

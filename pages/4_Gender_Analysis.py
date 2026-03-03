@@ -33,7 +33,7 @@ with st.sidebar:
         format_func=lambda x: {"Female_Pct": "Female %", "Operative_Pct": "Operative %", "Total_Accounts": "Total Accounts", "Inactive_Pct": "Inactive %"}[x])
     sort_dir = st.radio("Sort order:", ["Ascending", "Descending"], horizontal=True)
     st.markdown("---")
-    st.markdown("<div class='info-box'><small>Gender data: Karnataka 30 districts (2023)</small></div>", unsafe_allow_html=True)
+    st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'><small>Gender data: Karnataka 30 districts (2023)</small></div>", unsafe_allow_html=True)
 
 st.markdown("""
 <div class='gov-header'>
@@ -43,7 +43,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<div class='info-box'>
+<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>
 <b>Why gender matters:</b> PMJDY was explicitly designed to prioritize women. But access ≠ usage.
 This section examines whether women are truly included or just counted.
 <br><b>Data:</b> Karnataka district-level gender breakdown (30 districts, 2023)
@@ -86,7 +86,7 @@ if district_search: active.append(f"Search: '{district_search}'")
 if female_range != (0, 100): active.append(f"Female %: {female_range[0]}–{female_range[1]}")
 if operative_range != (0, 100): active.append(f"Operative %: {operative_range[0]}–{operative_range[1]}")
 if active:
-    st.markdown(f"<div class='info-box'>🔽 <b>Active filters:</b> {' · '.join(active)} - showing <b>{len(df)}</b> of <b>{len(karnataka)}</b> districts</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>🔽 <b>Active filters:</b> {' · '.join(active)} - showing <b>{len(df)}</b> of <b>{len(karnataka)}</b> districts</div>", unsafe_allow_html=True)
 
 st.markdown(f"### 📍 Karnataka District Gender Analysis - {len(df)} Districts")
 
@@ -120,7 +120,7 @@ with col2:
 
 st.markdown("---")
 st.markdown("### 🔄 Female Share vs Operative Rate - Access vs Agency")
-st.markdown("<div class='info-box'>Do districts with more women's accounts have more or less active usage?</div>", unsafe_allow_html=True)
+st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Do districts with more women's accounts have more or less active usage?</div>", unsafe_allow_html=True)
 
 color_scatter = st.radio("Color scatter by:", ["Inactive_Pct", "Operative_Pct", "Total_Accounts"], horizontal=True,
                           format_func=lambda x: {"Inactive_Pct": "Inactive %", "Operative_Pct": "Operative %", "Total_Accounts": "Total Accounts"}[x])
