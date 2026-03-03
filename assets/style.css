@@ -654,3 +654,19 @@
 [data-testid="stSidebar"] .stMarkdown h3 {
     color: #FFFFFF !important;
 }
+/* ── FIX PAGE LINKS IN SIDEBAR - KEEP WHITE ── */
+[data-testid="stSidebar"] [data-testid="stPageLink"] p,
+[data-testid="stSidebar"] [data-testid="stPageLink"] span,
+[data-testid="stSidebar"] [data-testid="stPageLink"] div {
+    color: #C8DEFF !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stPageLink"]:hover p,
+[data-testid="stSidebar"] [data-testid="stPageLink"]:hover span {
+    color: #FFFFFF !important;
+}
+
+[data-testid="stSidebar"] [aria-current="page"] p,
+[data-testid="stSidebar"] [aria-current="page"] span {
+    color: #FFFFFF !important;
+}
