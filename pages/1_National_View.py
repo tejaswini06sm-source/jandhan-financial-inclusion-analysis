@@ -27,21 +27,6 @@ df = get_data()
 with st.sidebar:
     st.page_link("app.py", label="🏠 Back to Home")
     st.markdown("---")
-    pages = {
-        "🗺️ National View": "pages/1_National_View.py",
-        "📊 State Analysis": "pages/2_State_Analysis.py",
-        "🏘️ District Explorer": "pages/3_District_View.py",
-        "👥 Gender Analysis": "pages/4_Gender_Analysis.py",
-        "💰 Balance Analysis": "pages/5_Balance_Analysis.py",
-        "🤖 ML Insights": "pages/6_ML_Insights.py",
-        "📄 Policy Brief": "pages/7_Policy_Brief.py",
-        "ℹ️ About": "pages/8_About.py"
-    }
-    selected_page = st.selectbox("📂 Navigate", list(pages.keys()))
-    if selected_page:
-        st.switch_page(pages[selected_page])
-    st.markdown("---")
-
     st.markdown("## 🗺️ National View")
     st.markdown("---")
     st.markdown("---")
