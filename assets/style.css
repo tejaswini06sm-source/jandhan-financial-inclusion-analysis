@@ -390,3 +390,13 @@ hr {
     }
     .gov-header h1 { font-size: 15px !important; }
 }
+/* ── SIDEBAR BOTTOM INFO BOX ── */
+[data-testid="stSidebar"] .kpi-card,
+[data-testid="stSidebar"] .kpi-card *,
+[data-testid="stSidebar"] .info-box,
+[data-testid="stSidebar"] .info-box *,
+[data-testid="stSidebar"] div[style],
+[data-testid="stSidebar"] div[style] * {
+    color: #1E293B !important;
+    background-color: #FFFFFF !important;
+}
