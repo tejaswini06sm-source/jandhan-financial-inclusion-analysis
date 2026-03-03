@@ -622,3 +622,35 @@
 [data-testid="stSidebarHeader"] {
     display: none !important;
 }
+/* ── SIDEBAR ALL TEXT VISIBILITY FIX ── */
+[data-testid="stSidebar"] [data-testid="stSelectbox"] div,
+[data-testid="stSidebar"] [data-testid="stSelectbox"] span,
+[data-testid="stSidebar"] [data-testid="stSelectbox"] p,
+[data-testid="stSidebar"] [data-testid="stTextInput"] input,
+[data-testid="stSidebar"] [data-testid="stSlider"] span,
+[data-testid="stSidebar"] [data-testid="stSlider"] p,
+[data-testid="stSidebar"] [data-testid="stRadio"] span,
+[data-testid="stSidebar"] [data-testid="stRadio"] p,
+[data-testid="stSidebar"] [data-testid="stCheckbox"] span,
+[data-testid="stSidebar"] [data-testid="stCheckbox"] p,
+[data-testid="stSidebar"] [data-testid="stMultiSelect"] span,
+[data-testid="stSidebar"] [data-testid="stMultiSelect"] div,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] p {
+    color: #1E293B !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stTextInput"] input,
+[data-testid="stSidebar"] [data-baseweb="select"],
+[data-testid="stSidebar"] [data-baseweb="input"] {
+    background-color: #FFFFFF !important;
+    color: #1E293B !important;
+}
+
+/* Keep header/title white */
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] .stMarkdown h2,
+[data-testid="stSidebar"] .stMarkdown h3 {
+    color: #FFFFFF !important;
+}
