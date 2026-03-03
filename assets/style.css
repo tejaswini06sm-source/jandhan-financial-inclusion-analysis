@@ -654,19 +654,31 @@
 [data-testid="stSidebar"] .stMarkdown h3 {
     color: #FFFFFF !important;
 }
-/* ── FIX PAGE LINKS IN SIDEBAR - KEEP WHITE ── */
+/* ── SIDEBAR INPUT BOXES - WHITE BACKGROUND DARK TEXT ── */
+[data-testid="stSidebar"] [data-testid="stTextInput"] input {
+    background-color: #FFFFFF !important;
+    color: #1E293B !important;
+}
+
+[data-testid="stSidebar"] [data-baseweb="select"] {
+    background-color: #FFFFFF !important;
+}
+
+[data-testid="stSidebar"] [data-baseweb="select"] div,
+[data-testid="stSidebar"] [data-baseweb="select"] span {
+    color: #1E293B !important;
+    background-color: #FFFFFF !important;
+}
+
+/* ── SIDEBAR LABELS - KEEP WHITE ── */
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] .stMarkdown p,
+[data-testid="stSidebar"] p {
+    color: #E8F0FE !important;
+}
+
+/* ── SIDEBAR PAGE LINKS - KEEP WHITE ── */
 [data-testid="stSidebar"] [data-testid="stPageLink"] p,
-[data-testid="stSidebar"] [data-testid="stPageLink"] span,
-[data-testid="stSidebar"] [data-testid="stPageLink"] div {
+[data-testid="stSidebar"] [data-testid="stPageLink"] span {
     color: #C8DEFF !important;
-}
-
-[data-testid="stSidebar"] [data-testid="stPageLink"]:hover p,
-[data-testid="stSidebar"] [data-testid="stPageLink"]:hover span {
-    color: #FFFFFF !important;
-}
-
-[data-testid="stSidebar"] [aria-current="page"] p,
-[data-testid="stSidebar"] [aria-current="page"] span {
-    color: #FFFFFF !important;
 }
