@@ -714,3 +714,15 @@
     color: #1E293B !important;
     font-weight: 700 !important;
 }
+/* ── FORCE ALL SIDEBAR TEXT WHITE ── */
+[data-testid="stSidebar"] * {
+    color: #E8F0FE !important;
+}
+
+/* ── EXCEPTION: INPUT BOXES KEEP DARK TEXT ── */
+[data-testid="stSidebar"] input,
+[data-testid="stSidebar"] [data-baseweb="select"] div,
+[data-testid="stSidebar"] [data-baseweb="select"] span {
+    color: #1E293B !important;
+    background-color: #FFFFFF !important;
+}
