@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_bihar_districts, load_karnataka_districts, load_maharashtra_districts
 from utils.ml_models import detect_anomalies
 
-st.set_page_config(page_title="District Explorer - PMJDY", page_icon="🏘️", layout="wide")
+st.set_page_config(page_title="District Explorer - PMJDY", page_icon="", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -20,15 +20,15 @@ def get_data():
 bihar, karnataka, maharashtra = get_data()
 
 with st.sidebar:
-    st.page_link("app.py", label="🏠 Back to Home")
+    st.page_link("app.py", label=" Back to Home")
     st.markdown("---")
-    st.markdown("## 🏘️ District Explorer")
+    st.markdown("##  District Explorer")
     st.markdown("---")
     st.markdown("---")
-    selected_state = st.radio("📍 Select State", ["Bihar", "Karnataka", "Maharashtra"])
+    selected_state = st.radio(" Select State", ["Bihar", "Karnataka", "Maharashtra"])
     st.markdown("---")
-    st.markdown("### 🔽 Filters")
-    district_search = st.text_input("🔍 Search District", placeholder="Type district name...")
+    st.markdown("###  Filters")
+    district_search = st.text_input(" Search District", placeholder="Type district name...")
     top_n = st.slider("Show Top N districts in charts", min_value=5, max_value=38, value=10, step=5)
     sort_direction = st.radio("Sort order", ["Descending", "Ascending"], horizontal=True)
     st.markdown("---")
@@ -36,8 +36,8 @@ with st.sidebar:
 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>🏘️ District Explorer</h1>
-    <p style='margin:5px 0 0 0; opacity:0.9;'>Search, compare and analyse districts - Bihar · Karnataka · Maharashtra</p>
+    <h1 style='margin:0; font-size:24px;'> District Explorer</h1>
+    <p style='margin:5px 0 0 0; opacity:0.9;'>Search, compare and analyse districts - Bihar  Karnataka  Maharashtra</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -49,7 +49,7 @@ if selected_state == "Bihar":
     if district_search:
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
-    st.markdown("### 📍 Bihar - District Analysis")
+    st.markdown("###  Bihar - District Analysis")
     st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Data: Rajya Sabha Unstarred Question No. 246, 2022.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -84,7 +84,7 @@ if selected_state == "Bihar":
         fig2.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
         st.plotly_chart(fig2, use_container_width=True)
 
-    st.markdown("**📋 Full Bihar District Data**")
+    st.markdown("** Full Bihar District Data**")
     bal_range = st.slider("Filter by Avg Balance (₹):", int(df["Avg_Balance_INR"].min()), int(df["Avg_Balance_INR"].max()),
                            (int(df["Avg_Balance_INR"].min()), int(df["Avg_Balance_INR"].max())))
     display = df[df["Avg_Balance_INR"].between(bal_range[0], bal_range[1])][
@@ -93,7 +93,7 @@ if selected_state == "Bihar":
     ).sort_values("Avg Balance (₹)", ascending=asc).reset_index(drop=True)
     display.index = display.index + 1
     st.dataframe(display.style.background_gradient(subset=["Avg Balance (₹)"], cmap="Greens"), use_container_width=True)
-    st.download_button("⬇️ Download Bihar Data", df.to_csv(index=False), "bihar_districts.csv", "text/csv")
+    st.download_button(" Download Bihar Data", df.to_csv(index=False), "bihar_districts.csv", "text/csv")
 
 elif selected_state == "Karnataka":
     df = karnataka.copy()
@@ -101,7 +101,7 @@ elif selected_state == "Karnataka":
     if district_search:
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
-    st.markdown("### 📍 Karnataka - District Analysis")
+    st.markdown("###  Karnataka - District Analysis")
     st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Data: Rajya Sabha Unstarred Question No. 2313, 2023.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -138,7 +138,7 @@ elif selected_state == "Karnataka":
         fig2.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
         st.plotly_chart(fig2, use_container_width=True)
 
-    st.markdown("**📋 Full Karnataka District Data**")
+    st.markdown("** Full Karnataka District Data**")
     display = df_filtered[["District", "Total_Accounts", "Male_Accounts", "Female_Accounts",
                             "Operative_Accounts", "Female_Pct", "Operative_Pct", "Inactive_Pct"]].rename(columns={
         "Total_Accounts": "Total", "Male_Accounts": "Male", "Female_Accounts": "Female",
@@ -146,14 +146,14 @@ elif selected_state == "Karnataka":
     }).sort_values(sort_metric_k.replace("_Pct", " %").replace("_Accounts", "").replace("Total_Accounts","Total"), ascending=asc).reset_index(drop=True)
     display.index = display.index + 1
     st.dataframe(display.style.background_gradient(subset=["Operative %"], cmap="Greens"), use_container_width=True)
-    st.download_button("⬇️ Download Karnataka Data", df.to_csv(index=False), "karnataka_districts.csv", "text/csv")
+    st.download_button(" Download Karnataka Data", df.to_csv(index=False), "karnataka_districts.csv", "text/csv")
 
 elif selected_state == "Maharashtra":
     df = maharashtra.copy()
     if district_search:
         df = df[df["District"].str.contains(district_search, case=False, na=False)]
 
-    st.markdown("### 📍 Maharashtra - 4-Year Trend (2022–2024)")
+    st.markdown("###  Maharashtra - 4-Year Trend (20222024)")
     st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Data: Rajya Sabha Unstarred Question No. 886, 2024. 4-point time series: Mar 2022, Mar 2023, Mar 2024, Jun 2024.</div>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -165,7 +165,7 @@ elif selected_state == "Maharashtra":
     # Growth range filter
     g_min = float(df["Growth_2022_2024"].min())
     g_max = float(df["Growth_2022_2024"].max())
-    growth_range = st.slider("Filter by Growth % (2022→2024):", round(g_min), round(g_max), (round(g_min), round(g_max)))
+    growth_range = st.slider("Filter by Growth % (20222024):", round(g_min), round(g_max), (round(g_min), round(g_max)))
     df_filtered = df[df["Growth_2022_2024"].between(growth_range[0], growth_range[1])]
 
     st.markdown("---")
@@ -175,7 +175,7 @@ elif selected_state == "Maharashtra":
         top_df = df_filtered.nlargest(top_n, "Growth_2022_2024").sort_values("Growth_2022_2024", ascending=asc)
         fig = px.bar(top_df, x="Growth_2022_2024", y="District", orientation="h",
                      color="Growth_2022_2024", color_continuous_scale="RdYlGn",
-                     labels={"Growth_2022_2024": "Growth % (2022→2024)", "District": ""}, height=500)
+                     labels={"Growth_2022_2024": "Growth % (20222024)", "District": ""}, height=500)
         fig.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
         st.plotly_chart(fig, use_container_width=True)
 
@@ -199,7 +199,7 @@ elif selected_state == "Maharashtra":
 
     # Multi-district comparison
     st.markdown("---")
-    st.markdown("**📊 Compare Multiple Districts**")
+    st.markdown("** Compare Multiple Districts**")
     compare_districts = st.multiselect("Select districts to compare:", sorted(df["District"].tolist()), default=sorted(df["District"].tolist())[:5])
     if compare_districts:
         comp_df = df[df["District"].isin(compare_districts)].melt(
@@ -211,13 +211,13 @@ elif selected_state == "Maharashtra":
         fig3.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
         st.plotly_chart(fig3, use_container_width=True)
 
-    st.markdown("**📋 Full Maharashtra District Data**")
+    st.markdown("** Full Maharashtra District Data**")
     display = df_filtered[["District", "Mar_2022", "Mar_2023", "Mar_2024", "Jun_2024", "Growth_2022_2024"]].rename(columns={
         "Mar_2022": "Mar 2022", "Mar_2023": "Mar 2023", "Mar_2024": "Mar 2024", "Jun_2024": "Jun 2024", "Growth_2022_2024": "Growth %"
     }).sort_values("Growth %", ascending=asc).reset_index(drop=True)
     display.index = display.index + 1
     st.dataframe(display.style.background_gradient(subset=["Growth %"], cmap="Greens"), use_container_width=True)
-    st.download_button("⬇️ Download Maharashtra Data", df.to_csv(index=False), "maharashtra_districts.csv", "text/csv")
+    st.download_button(" Download Maharashtra Data", df.to_csv(index=False), "maharashtra_districts.csv", "text/csv")
 
 st.markdown("---")
-st.markdown("<div class='gov-footer'>🏦 PMJDY Dashboard · District data: Rajya Sabha Questions 2022–2024 · Ministry of Finance, GoI</div>", unsafe_allow_html=True)
+st.markdown("<div class='gov-footer'> PMJDY Dashboard  District data: Rajya Sabha Questions 20222024  Ministry of Finance, GoI</div>", unsafe_allow_html=True)

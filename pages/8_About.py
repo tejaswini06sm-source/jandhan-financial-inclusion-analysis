@@ -3,21 +3,21 @@ import sys, os
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-st.set_page_config(page_title="About - PMJDY Dashboard", page_icon="ℹ️", layout="wide")
+st.set_page_config(page_title="About - PMJDY Dashboard", page_icon="", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 with st.sidebar:
-    st.page_link("app.py", label="🏠 Back to Home")
+    st.page_link("app.py", label=" Back to Home")
     st.markdown("---")
-    st.markdown("## ℹ️ About")
+    st.markdown("##  About")
     st.markdown("---")
 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>ℹ️ About This Dashboard</h1>
-    <p style='margin:5px 0 0 0; opacity:0.9;'>Data sources · Methodology · Limitations · Contact</p>
+    <h1 style='margin:0; font-size:24px;'> About This Dashboard</h1>
+    <p style='margin:5px 0 0 0; opacity:0.9;'>Data sources  Methodology  Limitations  Contact</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -26,7 +26,7 @@ st.markdown("---")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("### 👩‍💻 About the Project")
+    st.markdown("###  About the Project")
     st.markdown("""
     This dashboard was built as an independent data analysis project examining
     India's flagship financial inclusion program - PMJDY - using **real, publicly available
@@ -50,7 +50,7 @@ with col1:
     """)
 
 with col2:
-    st.markdown("### 📁 Data Sources")
+    st.markdown("###  Data Sources")
     st.markdown("""
     All data is sourced from official government documents. Every dataset is cited:
 
@@ -76,7 +76,7 @@ st.markdown("---")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("### ⚠️ Data Limitations")
+    st.markdown("###  Data Limitations")
     st.markdown("""
     Being transparent about what this data cannot tell us:
 
@@ -90,7 +90,7 @@ with col1:
     and should be treated as indicative, not precise.
 
     **3. Time periods vary**
-    Bihar data = 2022, Karnataka = 2023, Maharashtra = 2022–2024, State data = 2024.
+    Bihar data = 2022, Karnataka = 2023, Maharashtra = 20222024, State data = 2024.
     Direct comparisons across time periods should be made cautiously.
 
     **4. Population projections are estimates**
@@ -103,7 +103,7 @@ with col1:
     """)
 
 with col2:
-    st.markdown("### 🔬 Methodology")
+    st.markdown("###  Methodology")
     st.markdown("""
     **Performance Score** = weighted combination of:
     - 50% weight: Accounts per 1,000 population (normalised 0-100)
@@ -133,7 +133,7 @@ with col2:
 
 st.markdown("---")
 
-st.markdown("### 🔗 Useful Links")
+st.markdown("###  Useful Links")
 col1, col2, col3, col4 = st.columns(4)
 with col1:
     st.markdown("""
@@ -166,7 +166,7 @@ with col4:
 
 st.markdown("---")
 
-st.markdown("### 📜 Citing This Dashboard")
+st.markdown("###  Citing This Dashboard")
 st.markdown("""
 ```
 Mathpati, T.S. (2024). PMJDY Financial Inclusion Analysis Dashboard.
@@ -178,7 +178,7 @@ Available at: [your streamlit URL]
 st.markdown("---")
 st.markdown("""
 <div class='gov-footer'>
-    🏦 PMJDY Financial Inclusion Dashboard &nbsp;|&nbsp;
+     PMJDY Financial Inclusion Dashboard &nbsp;|&nbsp;
     Independent research project &nbsp;|&nbsp;
     Not affiliated with Government of India &nbsp;|&nbsp;
     Built by Tejaswini Shidheshwar Mathpati &nbsp;|&nbsp;

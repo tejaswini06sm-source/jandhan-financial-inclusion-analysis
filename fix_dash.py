@@ -9,7 +9,7 @@ for folder in folders:
             with open(fpath, 'r', encoding='utf-8') as f:
                 content = f.read()
             original = content
-            content = content.replace('—', '-')
+            content = content.replace('', '-')
             if content != original:
                 with open(fpath, 'w', encoding='utf-8') as f:
                     f.write(content)

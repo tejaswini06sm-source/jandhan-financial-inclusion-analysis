@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_state_data, load_maharashtra_districts
 from utils.ml_models import cluster_states, predict_underperformers, growth_predictor, detect_anomalies
 
-st.set_page_config(page_title="ML Insights - PMJDY", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="ML Insights - PMJDY", page_icon="", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -25,15 +25,15 @@ def get_data():
 df, maha = get_data()
 
 with st.sidebar:
-    st.page_link("app.py", label="🏠 Back to Home")
+    st.page_link("app.py", label=" Back to Home")
     st.markdown("---")
-    st.markdown("## 🤖 ML Insights")
+    st.markdown("##  ML Insights")
     st.markdown("---")
 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>🤖 ML Insights - Machine Learning on PMJDY Data</h1>
-    <p style='margin:5px 0 0 0; opacity:0.9;'>K-Means clustering · Growth prediction · Anomaly detection · Underperformance identification</p>
+    <h1 style='margin:0; font-size:24px;'> ML Insights - Machine Learning on PMJDY Data</h1>
+    <p style='margin:5px 0 0 0; opacity:0.9;'>K-Means clustering  Growth prediction  Anomaly detection  Underperformance identification</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -46,11 +46,11 @@ identification - all on real government data. Each model is explained in plain E
 """, unsafe_allow_html=True)
 
 st.markdown("---")
-tabs = st.tabs(["🎯 State Clustering", "⚠️ Underperformers", "📈 Growth Predictor", "🔍 Anomaly Detection"])
+tabs = st.tabs([" State Clustering", " Underperformers", " Growth Predictor", " Anomaly Detection"])
 
-# ══ TAB 1: CLUSTERING ══
+#  TAB 1: CLUSTERING 
 with tabs[0]:
-    st.markdown("### 🎯 K-Means State Clustering - Performance Tiers")
+    st.markdown("###  K-Means State Clustering - Performance Tiers")
     st.markdown("""
     **Method:** K-Means (k=3) applied to accounts per 1000 population + avg balance + performance score.
     States are grouped into 3 natural clusters based on their actual data - not manual categorization.
@@ -84,11 +84,11 @@ with tabs[0]:
         st.markdown("**States by Tier**")
         for tier in ["High Performer", "Developing", "Needs Attention"]:
             states = df[df["Tier"] == tier]["State"].tolist()
-            color = {"High Performer": "🟢", "Developing": "🟡", "Needs Attention": "🔴"}[tier]
+            color = {"High Performer": "", "Developing": "", "Needs Attention": ""}[tier]
             with st.expander(f"{color} {tier} ({len(states)} states)"):
                 st.write(", ".join(sorted(states)))
 
-    with st.expander("📖 How does K-Means work here?"):
+    with st.expander(" How does K-Means work here?"):
         st.markdown("""
         1. Each state is represented as a point in 3D space: (accounts per 1000, avg balance, performance score)
         2. K-Means finds 3 cluster centers that minimize within-cluster distances
@@ -97,9 +97,9 @@ with tabs[0]:
         5. **Limitation:** With only 36 data points, clusters should be interpreted as approximate groupings, not definitive labels
         """)
 
-# ══ TAB 2: UNDERPERFORMERS ══
+#  TAB 2: UNDERPERFORMERS 
 with tabs[1]:
-    st.markdown("### ⚠️ Underperformance Analysis - States Not Meeting Their Potential")
+    st.markdown("###  Underperformance Analysis - States Not Meeting Their Potential")
     st.markdown("""
     **Method:** A state is considered underperforming if its actual accounts are below 45% of its projected population
     (a reasonable financial inclusion target for a state's adult population).
@@ -143,9 +143,9 @@ with tabs[1]:
         fig2.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
         st.plotly_chart(fig2, use_container_width=True)
 
-# ══ TAB 3: GROWTH PREDICTOR ══
+#  TAB 3: GROWTH PREDICTOR 
 with tabs[2]:
-    st.markdown("### 📈 Growth Rate Predictor - Maharashtra Districts")
+    st.markdown("###  Growth Rate Predictor - Maharashtra Districts")
     st.markdown("""
     **Method:** Linear regression fitted on 3 data points (March 2022, 2023, 2024) per district.
     Projects the annual growth rate and estimates when each district will reach 120% of current accounts (proxy for saturation).
@@ -200,9 +200,9 @@ with tabs[2]:
         use_container_width=True
     )
 
-# ══ TAB 4: ANOMALY DETECTION ══
+#  TAB 4: ANOMALY DETECTION 
 with tabs[3]:
-    st.markdown("### 🔍 Anomaly Detection - Which States Behave Unusually?")
+    st.markdown("###  Anomaly Detection - Which States Behave Unusually?")
     st.markdown("""
     **Method:** Z-score standardization. States with |z-score| > 2 are flagged as anomalies -
     meaning they are more than 2 standard deviations from the mean in accounts or balance.
@@ -249,7 +249,7 @@ with tabs[3]:
     if len(flagged) > 0:
         st.markdown("**Flagged Anomalous States**")
         st.dataframe(flagged.reset_index(drop=True), use_container_width=True, hide_index=True)
-        with st.expander("📖 Why are these states anomalous?"):
+        with st.expander(" Why are these states anomalous?"):
             st.markdown("""
             - **Large states** like UP, Bihar, West Bengal naturally appear as high-account anomalies - they have enormous populations
             - **Small UTs** like Lakshadweep, Andaman appear as low-account anomalies - tiny populations
@@ -258,4 +258,4 @@ with tabs[3]:
             """)
 
 st.markdown("---")
-st.markdown("<div class='gov-footer'>🏦 PMJDY Dashboard · ML: K-Means, Linear Regression, Z-Score · Real government data · 2024</div>", unsafe_allow_html=True)
+st.markdown("<div class='gov-footer'> PMJDY Dashboard  ML: K-Means, Linear Regression, Z-Score  Real government data  2024</div>", unsafe_allow_html=True)

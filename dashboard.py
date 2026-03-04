@@ -9,14 +9,14 @@ from sklearn.cluster import KMeans
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── Page Config ──
+#  Page Config 
 st.set_page_config(
     page_title="Jan Dhan Financial Inclusion Analysis",
-    page_icon="🏦",
+    page_icon="",
     layout="wide"
 )
 
-# ── Load Data from SQLite ──
+#  Load Data from SQLite 
 @st.cache_data
 def load_data():
     engine = create_engine('sqlite:///jandhan_analysis.db')
@@ -52,7 +52,7 @@ def load_data():
 
 df = load_data()
 
-# ── Colors ──
+#  Colors 
 colors = {'Urban': '#1F4E79', 'Semi-Urban': '#2E86AB', 'Rural': '#E84855'}
 tier_colors = {
     'High Priority': '#E84855',
@@ -60,12 +60,12 @@ tier_colors = {
     'On Track': '#2A9D8F'
 }
 
-# ─────────────────────────────────────────────
+# 
 # HEADER
-# ─────────────────────────────────────────────
+# 
 st.markdown("""
     <h1 style='color:#1F4E79; margin-bottom:0'>
-        🏦 Why Are Jan Dhan Accounts Lying Empty?
+         Why Are Jan Dhan Accounts Lying Empty?
     </h1>
     <p style='color:#555; font-size:18px; margin-top:4px'>
         District-Level Financial Inclusion Analysis - India
@@ -73,9 +73,9 @@ st.markdown("""
     <hr style='border:1px solid #1F4E79'>
 """, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
+# 
 # TOP KPI METRICS
-# ─────────────────────────────────────────────
+# 
 col1, col2, col3, col4 = st.columns(4)
 
 rural_zero = df[df['area_type']=='Rural']['zero_balance_pct'].mean()
@@ -96,10 +96,10 @@ col4.metric("High Priority Districts", f"{high_priority}",
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
+# 
 # SIDEBAR FILTERS
-# ─────────────────────────────────────────────
-st.sidebar.markdown("## 🔍 Filter Data")
+# 
+st.sidebar.markdown("##  Filter Data")
 selected_states = st.sidebar.multiselect(
     "Select States",
     options=sorted(df['state'].unique()),
@@ -125,9 +125,9 @@ filtered_df = df[
 st.sidebar.markdown("---")
 st.sidebar.markdown(f"**Showing {len(filtered_df)} of {len(df)} districts**")
 
-# ─────────────────────────────────────────────
+# 
 # ROW 1: CHARTS
-# ─────────────────────────────────────────────
+# 
 col1, col2 = st.columns(2)
 
 with col1:
@@ -178,9 +178,9 @@ with col2:
     st.pyplot(fig)
     plt.close()
 
-# ─────────────────────────────────────────────
+# 
 # ROW 2: STATE + TIER
-# ─────────────────────────────────────────────
+# 
 col1, col2 = st.columns(2)
 
 with col1:
@@ -228,11 +228,11 @@ with col2:
     st.pyplot(fig)
     plt.close()
 
-# ─────────────────────────────────────────────
+# 
 # DISTRICT DATA TABLE
-# ─────────────────────────────────────────────
+# 
 st.markdown("---")
-st.markdown("#### 📋 District-Level Data")
+st.markdown("####  District-Level Data")
 
 display_df = filtered_df[[
     'district', 'state', 'area_type',
@@ -257,11 +257,11 @@ st.dataframe(
     use_container_width=True
 )
 
-# ─────────────────────────────────────────────
+# 
 # POLICY BRIEF
-# ─────────────────────────────────────────────
+# 
 st.markdown("---")
-st.markdown("#### 📄 Policy Recommendations")
+st.markdown("####  Policy Recommendations")
 
 col1, col2, col3 = st.columns(3)
 

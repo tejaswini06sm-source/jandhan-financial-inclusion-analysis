@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_state_data
 from utils.ml_models import cluster_states, predict_underperformers
 
-st.set_page_config(page_title="National View - PMJDY", page_icon="🗺️", layout="wide")
+st.set_page_config(page_title="National View - PMJDY", page_icon="", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -23,44 +23,44 @@ def get_data():
 
 df = get_data()
 
-# ── SIDEBAR FILTERS ──
+#  SIDEBAR FILTERS 
 with st.sidebar:
-    st.page_link("app.py", label="🏠 Back to Home")
+    st.page_link("app.py", label=" Back to Home")
     st.markdown("---")
-    st.markdown("## 🗺️ National View")
+    st.markdown("##  National View")
     st.markdown("---")
     st.markdown("---")
 
-    st.markdown("### 🔽 Filters")
+    st.markdown("###  Filters")
 
-    search = st.text_input("🔍 Search State", placeholder="e.g. Bihar, Goa...")
+    search = st.text_input(" Search State", placeholder="e.g. Bihar, Goa...")
 
     region_filter = st.multiselect(
-        "🌏 Region",
+        " Region",
         options=sorted(df["Region"].dropna().unique()),
         default=sorted(df["Region"].dropna().unique())
     )
 
     tier_filter = st.multiselect(
-        "🏅 Performance Tier",
+        " Performance Tier",
         options=["High Performer", "Developing", "Needs Attention"],
         default=["High Performer", "Developing", "Needs Attention"]
     )
 
     bal_min = int(df["Avg_Balance_INR"].min())
     bal_max = int(df["Avg_Balance_INR"].max())
-    balance_range = st.slider("💰 Avg Balance Range (₹)", bal_min, bal_max, (bal_min, bal_max), step=100)
+    balance_range = st.slider(" Avg Balance Range (₹)", bal_min, bal_max, (bal_min, bal_max), step=100)
 
     cov_min = round(float(df["Accounts_Per_1000"].min()))
     cov_max = round(float(df["Accounts_Per_1000"].max()))
-    coverage_range = st.slider("📊 Accounts per 1,000 Population", cov_min, cov_max, (cov_min, cov_max), step=10)
+    coverage_range = st.slider(" Accounts per 1,000 Population", cov_min, cov_max, (cov_min, cov_max), step=10)
 
     acc_min = round(float(df["Accounts_Lakh"].min()))
     acc_max = round(float(df["Accounts_Lakh"].max()))
-    accounts_range = st.slider("👥 Total Accounts (Lakh)", acc_min, acc_max, (acc_min, acc_max), step=10)
+    accounts_range = st.slider(" Total Accounts (Lakh)", acc_min, acc_max, (acc_min, acc_max), step=10)
 
     sort_by = st.selectbox(
-        "↕️ Sort Charts By",
+        " Sort Charts By",
         options=["Accounts_Per_1000", "Avg_Balance_INR", "Accounts_Lakh", "Deposit_Crore"],
         format_func=lambda x: {
             "Accounts_Per_1000": "Accounts per 1,000 Pop",
@@ -70,15 +70,15 @@ with st.sidebar:
         }[x]
     )
 
-    show_underperforming = st.checkbox("⚠️ Show Underperforming States Only", value=False)
+    show_underperforming = st.checkbox(" Show Underperforming States Only", value=False)
 
-    if st.button("🔄 Reset All Filters"):
+    if st.button(" Reset All Filters"):
         st.rerun()
 
     st.markdown("---")
     st.markdown(f"**Total states:** {len(df)}")
 
-# ── APPLY FILTERS ──
+#  APPLY FILTERS 
 filtered = df.copy()
 
 if search:
@@ -95,28 +95,28 @@ filtered = filtered[
 if show_underperforming and "Underperforming" in filtered.columns:
     filtered = filtered[filtered["Underperforming"] == True]
 
-# ── HEADER ──
+#  HEADER 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>🗺️ National View - All 36 States & UTs</h1>
+    <h1 style='margin:0; font-size:24px;'> National View - All 36 States & UTs</h1>
     <p style='margin:5px 0 0 0; opacity:0.9;'>Complete state-wise PMJDY performance across India</p>
 </div>
 """, unsafe_allow_html=True)
 
-# ── ACTIVE FILTER SUMMARY ──
+#  ACTIVE FILTER SUMMARY 
 active = []
 if search: active.append(f"Search: '{search}'")
 if len(region_filter) < len(df["Region"].dropna().unique()): active.append(f"Regions: {', '.join(region_filter)}")
 if len(tier_filter) < 3: active.append(f"Tiers: {', '.join(tier_filter)}")
-if balance_range != (bal_min, bal_max): active.append(f"Balance: ₹{balance_range[0]:,}–₹{balance_range[1]:,}")
-if coverage_range != (cov_min, cov_max): active.append(f"Coverage: {coverage_range[0]}–{coverage_range[1]}/1000")
-if accounts_range != (acc_min, acc_max): active.append(f"Accounts: {accounts_range[0]}–{accounts_range[1]} Lakh")
+if balance_range != (bal_min, bal_max): active.append(f"Balance: ₹{balance_range[0]:,}₹{balance_range[1]:,}")
+if coverage_range != (cov_min, cov_max): active.append(f"Coverage: {coverage_range[0]}{coverage_range[1]}/1000")
+if accounts_range != (acc_min, acc_max): active.append(f"Accounts: {accounts_range[0]}{accounts_range[1]} Lakh")
 if show_underperforming: active.append("Underperforming only")
 
 if active:
-    st.markdown(f"<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>🔽 <b>Active filters:</b> {' · '.join(active)} - showing <b>{len(filtered)}</b> of <b>{len(df)}</b> states</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'> <b>Active filters:</b> {'  '.join(active)} - showing <b>{len(filtered)}</b> of <b>{len(df)}</b> states</div>", unsafe_allow_html=True)
 
-# ── KPIs ──
+#  KPIs 
 col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("States Shown", len(filtered), f"of {len(df)} total")
 col2.metric("Total Accounts", f"{filtered['Accounts'].sum()/1e7:.1f} Cr")
@@ -133,7 +133,7 @@ if len(filtered) == 0:
 
 st.markdown("---")
 
-# ── CHART 1: State Rankings ──
+#  CHART 1: State Rankings 
 label_map = {
     "Accounts_Per_1000": "Accounts per 1,000 Population",
     "Avg_Balance_INR": "Avg Balance (₹)",
@@ -141,7 +141,7 @@ label_map = {
     "Deposit_Crore": "Total Deposits (Crore)"
 }
 
-st.markdown(f"#### 🏆 State Rankings - {label_map[sort_by]}")
+st.markdown(f"####  State Rankings - {label_map[sort_by]}")
 st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>This shows how many PMJDY accounts exist per 1,000 people in each state - a fairer comparison than raw totals, which favour large states.</div>", unsafe_allow_html=True)
 
 fig = px.bar(
@@ -159,7 +159,7 @@ if sort_by == "Accounts_Per_1000":
     fig.add_vline(x=200, line_dash="dash", line_color="#E74C3C", annotation_text="200/1000 target")
 st.plotly_chart(fig, use_container_width=True)
 
-with st.expander("📖 What does this mean?"):
+with st.expander(" What does this mean?"):
     st.markdown("""
     - States above **200 accounts per 1,000** are considered high-coverage areas
     - Small UTs like **Andaman & Nicobar** show very high per-capita numbers due to tiny populations
@@ -169,8 +169,8 @@ with st.expander("📖 What does this mean?"):
 
 st.markdown("---")
 
-# ── CHART 2: Scatter ──
-st.markdown("#### 💰 Total Accounts vs Average Balance - Who's Really Winning?")
+#  CHART 2: Scatter 
+st.markdown("####  Total Accounts vs Average Balance - Who's Really Winning?")
 st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>A state can have millions of accounts but tiny balances. This reveals which states have both quantity AND quality.</div>", unsafe_allow_html=True)
 
 color_by = st.radio("Color scatter by:", ["Region", "Tier"], horizontal=True)
@@ -189,7 +189,7 @@ fig2 = px.scatter(
 fig2.update_layout(plot_bgcolor="#F8F9FA", paper_bgcolor="white")
 st.plotly_chart(fig2, use_container_width=True)
 
-with st.expander("📖 What does this mean?"):
+with st.expander(" What does this mean?"):
     st.markdown("""
     - **Top-right** = best performers: many accounts AND high balances
     - **Top-left** = small but active: few accounts but people keep money in them
@@ -199,8 +199,8 @@ with st.expander("📖 What does this mean?"):
 
 st.markdown("---")
 
-# ── CHART 3: Region Summary ──
-st.markdown("#### 🧭 Region-wise Performance Summary")
+#  CHART 3: Region Summary 
+st.markdown("####  Region-wise Performance Summary")
 
 region_metric = st.radio("Show region chart by:", ["Avg Balance (₹)", "Accounts per 1,000", "Total Deposits (Cr)"], horizontal=True)
 metric_col = {"Avg Balance (₹)": "Avg_Balance_INR", "Accounts per 1,000": "Accounts_Per_1000", "Total Deposits (Cr)": "Deposit_Crore"}[region_metric]
@@ -221,8 +221,8 @@ st.plotly_chart(fig3, use_container_width=True)
 
 st.markdown("---")
 
-# ── FULL DATA TABLE ──
-st.markdown("#### 📋 Full State Data Table")
+#  FULL DATA TABLE 
+st.markdown("####  Full State Data Table")
 
 col1, col2 = st.columns([2, 1])
 with col1:
@@ -243,10 +243,10 @@ if show_cols:
     display_df.index = display_df.index + 1
     st.dataframe(display_df, use_container_width=True, height=400)
 
-# ── COVERAGE GAP TABLE ──
+#  COVERAGE GAP TABLE 
 if "Underperforming" in filtered.columns:
     st.markdown("---")
-    st.markdown("#### ⚠️ Coverage Gap Analysis")
+    st.markdown("####  Coverage Gap Analysis")
     st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Assuming a 45% target coverage of population, this shows how many more accounts each state needs to open.</div>", unsafe_allow_html=True)
     gap_cols = [c for c in ["State", "Region", "Coverage_Pct", "Gap_Lakh", "Tier"] if c in filtered.columns]
     gap_df = filtered[filtered["Underperforming"] == True][gap_cols].sort_values("Gap_Lakh", ascending=False).reset_index(drop=True)
@@ -254,13 +254,13 @@ if "Underperforming" in filtered.columns:
     if "Gap_Lakh" in gap_df.columns:
         st.dataframe(gap_df.style.background_gradient(subset=["Gap_Lakh"], cmap="Reds"), use_container_width=True, height=400)
 
-# ── DOWNLOAD ──
+#  DOWNLOAD 
 st.markdown("---")
 col1, col2 = st.columns(2)
 with col1:
-    st.download_button("⬇️ Download Filtered Data (CSV)", filtered.to_csv(index=False), "pmjdy_filtered_states.csv", "text/csv")
+    st.download_button(" Download Filtered Data (CSV)", filtered.to_csv(index=False), "pmjdy_filtered_states.csv", "text/csv")
 with col2:
-    st.download_button("⬇️ Download Full Dataset (CSV)", df.to_csv(index=False), "pmjdy_all_states.csv", "text/csv")
+    st.download_button(" Download Full Dataset (CSV)", df.to_csv(index=False), "pmjdy_all_states.csv", "text/csv")
 
 st.markdown("---")
-st.markdown("<div class='gov-footer'>🏦 PMJDY Dashboard · Source: Ministry of Finance, GoI · Data: 2024</div>", unsafe_allow_html=True)
+st.markdown("<div class='gov-footer'> PMJDY Dashboard  Source: Ministry of Finance, GoI  Data: 2024</div>", unsafe_allow_html=True)

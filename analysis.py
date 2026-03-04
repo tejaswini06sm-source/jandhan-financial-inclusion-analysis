@@ -7,14 +7,14 @@ from sqlalchemy import create_engine
 import warnings
 warnings.filterwarnings('ignore')
 
-# ─────────────────────────────────────────────────────────────
+# 
 # PHASE 1: DATA ENGINEERING - Build the SQLite Database
-# ─────────────────────────────────────────────────────────────
+# 
 
 # Create SQLite database engine
 engine = create_engine('sqlite:///jandhan_analysis.db')
 
-# ── TABLE 1: PMJDY Account Data ──
+#  TABLE 1: PMJDY Account Data 
 pmjdy_data = {
     'district_id': list(range(1, 25)),
     'district': [
@@ -79,7 +79,7 @@ pmjdy_data = {
     ],
 }
 
-# ── TABLE 2: MGNREGA & Infrastructure Data ──
+#  TABLE 2: MGNREGA & Infrastructure Data 
 infra_data = {
     'district_id': list(range(1, 25)),
     'mgnrega_coverage_pct': [
@@ -124,20 +124,20 @@ infra_data = {
     ],
 }
 
-# ── Save tables to SQLite database ──
+#  Save tables to SQLite database 
 df_pmjdy = pd.DataFrame(pmjdy_data)
 df_infra = pd.DataFrame(infra_data)
 
 df_pmjdy.to_sql('pmjdy_accounts', engine, if_exists='replace', index=False)
 df_infra.to_sql('infrastructure', engine, if_exists='replace', index=False)
 
-print("✅ SQLite database created: jandhan_analysis.db")
-print(f"   → pmjdy_accounts table: {len(df_pmjdy)} rows")
-print(f"   → infrastructure table: {len(df_infra)} rows")
+print(" SQLite database created: jandhan_analysis.db")
+print(f"    pmjdy_accounts table: {len(df_pmjdy)} rows")
+print(f"    infrastructure table: {len(df_infra)} rows")
 
-# ─────────────────────────────────────────────────────────────
+# 
 # PHASE 2: SQL QUERIES - Extract & Merge
-# ─────────────────────────────────────────────────────────────
+# 
 
 query = """
     SELECT 
@@ -156,11 +156,11 @@ query = """
 """
 
 df = pd.read_sql(query, engine)
-print(f"\n✅ Master dataset loaded: {df.shape[0]} districts, {df.shape[1]} features")
+print(f"\n Master dataset loaded: {df.shape[0]} districts, {df.shape[1]} features")
 
-# ─────────────────────────────────────────────────────────────
+# 
 # PHASE 3: EXPLORATORY DATA ANALYSIS
-# ─────────────────────────────────────────────────────────────
+# 
 
 print("\n" + "="*60)
 print("FINDING 1: Zero-Balance Rate by Area Type")
@@ -174,14 +174,14 @@ print(area_summary)
 rural_zero = area_summary.loc['Rural', 'Avg_Zero_Balance']
 urban_zero = area_summary.loc['Urban', 'Avg_Zero_Balance']
 ratio = rural_zero / urban_zero
-print(f"\n→ Rural zero-balance rate is {ratio:.1f}x higher than urban")
+print(f"\n Rural zero-balance rate is {ratio:.1f}x higher than urban")
 
 print("\n" + "="*60)
 print("FINDING 2: MGNREGA Coverage vs Average Balance")
 print("="*60)
 corr = df['mgnrega_coverage_pct'].corr(df['avg_balance_inr'])
 print(f"Pearson Correlation: {corr:.3f}")
-print("→ Districts with high MGNREGA coverage show lower average balances")
+print(" Districts with high MGNREGA coverage show lower average balances")
 print("  Wages deposited and immediately withdrawn - deep cash dependency")
 
 print("\n" + "="*60)
@@ -205,9 +205,9 @@ state_summary = df.groupby('state').agg(
 ).round(2).sort_values('Avg_Zero_Balance', ascending=True)
 print(state_summary)
 
-# ─────────────────────────────────────────────────────────────
+# 
 # PHASE 4: MACHINE LEARNING - District Segmentation
-# ─────────────────────────────────────────────────────────────
+# 
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
@@ -238,7 +238,7 @@ for k in range(2, 6):
     print(f"  k={k}: silhouette score = {score:.3f}")
 
 optimal_k = silhouette_scores.index(max(silhouette_scores)) + 2
-print(f"\n→ Optimal clusters: {optimal_k}")
+print(f"\n Optimal clusters: {optimal_k}")
 
 km_final = KMeans(n_clusters=3, random_state=42, n_init=10)
 df['cluster'] = km_final.fit_predict(features_scaled)
@@ -259,12 +259,12 @@ tier_summary = df.groupby('intervention_tier').agg(
     Avg_Balance_INR=('avg_balance_inr', 'mean'),
     Avg_Outlets=('banking_outlets_per_1000', 'mean')
 ).round(2)
-print("\n── Intervention Tiers ──")
+print("\n Intervention Tiers ")
 print(tier_summary)
 
-# ─────────────────────────────────────────────────────────────
+# 
 # PHASE 5: VISUALIZATIONS - 4-Panel Dashboard
-# ─────────────────────────────────────────────────────────────
+# 
 
 colors = {
     'Urban': '#1F4E79',
@@ -284,7 +284,7 @@ fig.suptitle(
     fontsize=16, fontweight='bold', y=1.03
 )
 
-# ── Chart 1: Zero Balance by Area Type ──
+#  Chart 1: Zero Balance by Area Type 
 ax1 = axes[0, 0]
 area_zero = df.groupby('area_type')['zero_balance_pct'].mean()
 bar_colors = [colors[a] for a in area_zero.index]
@@ -301,7 +301,7 @@ ax1.spines['top'].set_visible(False)
 ax1.spines['right'].set_visible(False)
 ax1.set_facecolor('#F8F9FA')
 
-# ── Chart 2: MGNREGA vs Avg Balance Scatter ──
+#  Chart 2: MGNREGA vs Avg Balance Scatter 
 ax2 = axes[0, 1]
 for area, grp in df.groupby('area_type'):
     ax2.scatter(grp['mgnrega_coverage_pct'], grp['avg_balance_inr'],
@@ -321,7 +321,7 @@ ax2.spines['top'].set_visible(False)
 ax2.spines['right'].set_visible(False)
 ax2.set_facecolor('#F8F9FA')
 
-# ── Chart 3: State-wise Zero Balance ──
+#  Chart 3: State-wise Zero Balance 
 ax3 = axes[1, 0]
 state_zero = df.groupby('state')['zero_balance_pct'].mean().sort_values()
 bar_clrs = ['#E84855' if v > 40 else '#F4A261' if v > 25 else '#2A9D8F'
@@ -341,7 +341,7 @@ ax3.spines['top'].set_visible(False)
 ax3.spines['right'].set_visible(False)
 ax3.set_facecolor('#F8F9FA')
 
-# ── Chart 4: Intervention Tier Map ──
+#  Chart 4: Intervention Tier Map 
 ax4 = axes[1, 1]
 tier_counts = df['intervention_tier'].value_counts()
 wedge_colors = [tier_colors[t] for t in tier_counts.index]
@@ -366,11 +366,11 @@ plt.tight_layout(pad=4.0)
 plt.savefig('financial_inclusion_dashboard.png',
             dpi=180, bbox_inches='tight', facecolor='white')
 plt.show()
-print("\n✅ Dashboard saved: financial_inclusion_dashboard.png")
+print("\n Dashboard saved: financial_inclusion_dashboard.png")
 
-# ─────────────────────────────────────────────────────────────
+# 
 # PHASE 6: POLICY BRIEF - Print to Console
-# ─────────────────────────────────────────────────────────────
+# 
 
 print("\n" + "="*60)
 print("POLICY BRIEF: 3 RECOMMENDATIONS FOR GOVERNMENT")
@@ -400,4 +400,4 @@ FINDING 3 - 4x Infrastructure Gap Requires Targeted BC Expansion
   Estimated 8-12 districts qualify for immediate intervention.
 """)
 
-print("✅ Analysis complete. Run: streamlit run dashboard.py")
+print(" Analysis complete. Run: streamlit run dashboard.py")

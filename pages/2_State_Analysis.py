@@ -7,7 +7,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_state_data
 
-st.set_page_config(page_title="State Analysis - PMJDY", page_icon="📊", layout="wide")
+st.set_page_config(page_title="State Analysis - PMJDY", page_icon="", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -19,17 +19,17 @@ def get_data():
 df = get_data()
 
 with st.sidebar:
-    st.page_link("app.py", label="🏠 Back to Home")
+    st.page_link("app.py", label=" Back to Home")
     st.markdown("---")
-    st.markdown("## 📊 State Analysis")
+    st.markdown("##  State Analysis")
     st.markdown("---")
     st.markdown("---")
-    st.markdown("### 🔽 Filters")
-    state_search = st.text_input("🔍 Search State", placeholder="Type to filter...")
+    st.markdown("###  Filters")
+    state_search = st.text_input(" Search State", placeholder="Type to filter...")
     filtered_states = sorted([s for s in df["State"].tolist() if state_search.lower() in s.lower()]) if state_search else sorted(df["State"].tolist())
-    selected_state = st.selectbox("📍 Select Primary State", filtered_states)
+    selected_state = st.selectbox(" Select Primary State", filtered_states)
     st.markdown("---")
-    compare_mode = st.checkbox("⚖️ Compare with another state", value=False)
+    compare_mode = st.checkbox(" Compare with another state", value=False)
     if compare_mode:
         compare_state = st.selectbox("Compare with", [s for s in sorted(df["State"].tolist()) if s != selected_state])
     st.markdown("---")
@@ -47,14 +47,14 @@ with st.sidebar:
 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>📊 State Deep Dive</h1>
+    <h1 style='margin:0; font-size:24px;'> State Deep Dive</h1>
     <p style='margin:5px 0 0 0; opacity:0.9;'>Detailed analysis for any state - accounts, deposits, rankings, and peer comparison</p>
 </div>
 """, unsafe_allow_html=True)
 
 state_data = df[df["State"] == selected_state].iloc[0]
 
-st.markdown(f"## 📋 {selected_state} - Scorecard")
+st.markdown(f"##  {selected_state} - Scorecard")
 col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Total Accounts", f"{state_data['Accounts']/1e5:.1f} Lakh")
 col2.metric("Total Deposits", f"₹{state_data['Deposit_Crore']:.0f} Cr")
@@ -75,7 +75,7 @@ st.markdown("---")
 
 if compare_mode:
     compare_data = df[df["State"] == compare_state].iloc[0]
-    st.markdown(f"### ⚖️ {selected_state} vs {compare_state}")
+    st.markdown(f"###  {selected_state} vs {compare_state}")
     metrics = ["Accounts", "Deposit_Crore", "Avg_Balance_INR", "Accounts_Per_1000", "Performance_Score"]
     labels = ["Total Accounts", "Deposits (Cr)", "Avg Balance (₹)", "Accounts/1000", "Performance Score"]
     vals1 = [state_data[m] for m in metrics]
@@ -90,12 +90,12 @@ if compare_mode:
                          text=[f"{v:,.0f}" for v in vals2], textposition="outside"))
     fig.update_layout(barmode="group", plot_bgcolor="#F8F9FA", paper_bgcolor="white", yaxis_title="Relative Score (%)", height=400)
     st.plotly_chart(fig, use_container_width=True)
-    summary = [{"Metric": l, selected_state: f"{v1:,.0f}", compare_state: f"{v2:,.0f}", "Winner 🏆": selected_state if v1 > v2 else compare_state}
+    summary = [{"Metric": l, selected_state: f"{v1:,.0f}", compare_state: f"{v2:,.0f}", "Winner ": selected_state if v1 > v2 else compare_state}
                for l, m, v1, v2 in zip(labels, metrics, vals1, vals2)]
     st.dataframe(pd.DataFrame(summary), hide_index=True, use_container_width=True)
     st.markdown("---")
 
-st.markdown(f"### 📍 {selected_state} in National Context")
+st.markdown(f"###  {selected_state} in National Context")
 col1, col2 = st.columns(2)
 label_map = {"Avg_Balance_INR": "Avg Balance (₹)", "Accounts_Per_1000": "Accounts per 1,000", "Accounts_Lakh": "Total Accounts (Lakh)", "Performance_Score": "Performance Score"}
 with col1:
@@ -125,7 +125,7 @@ st.markdown("---")
 region = state_data["Region"]
 peers = df if show_all_regions else df[df["Region"] == region]
 peer_title = "All States" if show_all_regions else f"{region} Region"
-st.markdown(f"### 🤝 {selected_state} vs {peer_title} Peers - sorted by {label_map.get(peer_metric, peer_metric)}")
+st.markdown(f"###  {selected_state} vs {peer_title} Peers - sorted by {label_map.get(peer_metric, peer_metric)}")
 
 def highlight_selected(row):
     return ['background-color: #FFF3CD' if row['State'] == selected_state else '' for _ in row]
@@ -136,14 +136,14 @@ peer_display = peers[["State", "Accounts_Lakh", "Deposit_Crore", "Avg_Balance_IN
 }).sort_values("Score /100", ascending=False).reset_index(drop=True)
 peer_display.index = peer_display.index + 1
 st.dataframe(peer_display.style.apply(highlight_selected, axis=1).background_gradient(subset=["Score /100"], cmap="Greens"), use_container_width=True)
-st.markdown("<small>🟡 Yellow = selected state</small>", unsafe_allow_html=True)
+st.markdown("<small> Yellow = selected state</small>", unsafe_allow_html=True)
 
 st.markdown("---")
 col1, col2 = st.columns(2)
 with col1:
-    st.download_button("⬇️ Download All State Data", df.to_csv(index=False), "pmjdy_all_states.csv", "text/csv")
+    st.download_button(" Download All State Data", df.to_csv(index=False), "pmjdy_all_states.csv", "text/csv")
 with col2:
-    st.download_button(f"⬇️ Download {selected_state} Data", df[df["State"]==selected_state].to_csv(index=False), f"pmjdy_{selected_state.lower().replace(' ','_')}.csv", "text/csv")
+    st.download_button(f" Download {selected_state} Data", df[df["State"]==selected_state].to_csv(index=False), f"pmjdy_{selected_state.lower().replace(' ','_')}.csv", "text/csv")
 
 st.markdown("---")
-st.markdown("<div class='gov-footer'>🏦 PMJDY Dashboard · Source: Ministry of Finance, GoI · Data: 2024</div>", unsafe_allow_html=True)
+st.markdown("<div class='gov-footer'> PMJDY Dashboard  Source: Ministry of Finance, GoI  Data: 2024</div>", unsafe_allow_html=True)

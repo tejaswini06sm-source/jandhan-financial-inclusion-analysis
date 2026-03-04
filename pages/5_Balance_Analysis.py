@@ -7,7 +7,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.data_loader import load_balance_distribution, load_state_data, load_bihar_districts
 
-st.set_page_config(page_title="Balance Analysis - PMJDY", page_icon="💰", layout="wide")
+st.set_page_config(page_title="Balance Analysis - PMJDY", page_icon="", layout="wide")
 
 with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "style.css"), encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -19,26 +19,26 @@ def get_data():
 balance_dist, state_df, bihar = get_data()
 
 with st.sidebar:
-    st.page_link("app.py", label="🏠 Back to Home")
+    st.page_link("app.py", label=" Back to Home")
     st.markdown("---")
-    st.markdown("## 💰 Balance Analysis")
+    st.markdown("##  Balance Analysis")
     st.markdown("---")
     st.markdown("---")
-    st.markdown("### 🔽 Filters")
+    st.markdown("###  Filters")
 
     # Region filter for state chart
     regions = sorted(state_df["Region"].dropna().unique())
-    region_filter = st.multiselect("🌏 Filter States by Region", regions, default=regions)
+    region_filter = st.multiselect(" Filter States by Region", regions, default=regions)
 
     # Balance range filter for state chart
     bal_min = int(state_df["Avg_Balance_INR"].min())
     bal_max = int(state_df["Avg_Balance_INR"].max())
-    bal_range = st.slider("💰 State Avg Balance Range (₹)", bal_min, bal_max, (bal_min, bal_max), step=100)
+    bal_range = st.slider(" State Avg Balance Range (₹)", bal_min, bal_max, (bal_min, bal_max), step=100)
 
     # Bihar filters
     st.markdown("---")
     st.markdown("**Bihar District Filters**")
-    bihar_search = st.text_input("🔍 Search Bihar District", placeholder="Type district name...")
+    bihar_search = st.text_input(" Search Bihar District", placeholder="Type district name...")
     bihar_bal_min = int(bihar["Avg_Balance_INR"].min())
     bihar_bal_max = int(bihar["Avg_Balance_INR"].max())
     bihar_bal_range = st.slider("Bihar Balance Range (₹)", bihar_bal_min, bihar_bal_max, (bihar_bal_min, bihar_bal_max), step=50)
@@ -51,7 +51,7 @@ with st.sidebar:
                            format_func=lambda x: {"Avg_Balance_INR": "Avg Balance", "Deposit_Crore": "Total Deposits"}[x])
     show_nat_avg_line = st.checkbox("Show national avg line", value=True)
 
-# ── APPLY FILTERS ──
+#  APPLY FILTERS 
 filtered_states = state_df[
     state_df["Region"].isin(region_filter) &
     state_df["Avg_Balance_INR"].between(bal_range[0], bal_range[1])
@@ -64,7 +64,7 @@ filtered_bihar = filtered_bihar[filtered_bihar["Avg_Balance_INR"].between(bihar_
 
 st.markdown("""
 <div class='gov-header'>
-    <h1 style='margin:0; font-size:24px;'>💰 Balance Analysis - What's Actually in the Accounts?</h1>
+    <h1 style='margin:0; font-size:24px;'> Balance Analysis - What's Actually in the Accounts?</h1>
     <p style='margin:5px 0 0 0; opacity:0.9;'>Are PMJDY accounts holding money, or just sitting empty?</p>
 </div>
 """, unsafe_allow_html=True)
@@ -78,7 +78,7 @@ Money comes in (wages, subsidies) and leaves within days. This section examines 
 
 st.markdown("---")
 
-# ── KPIs ──
+#  KPIs 
 total_deposit = filtered_states["Deposit_Crore"].sum()
 total_accounts = filtered_states["Accounts"].sum()
 avg_balance = total_deposit * 1e7 / total_accounts if total_accounts > 0 else 0
@@ -93,14 +93,14 @@ col5.metric("Lowest State", f"₹{filtered_states['Avg_Balance_INR'].min():.0f}"
 # Active filter summary
 active = []
 if len(region_filter) < len(regions): active.append(f"Regions: {', '.join(region_filter)}")
-if bal_range != (bal_min, bal_max): active.append(f"Balance: ₹{bal_range[0]:,}–₹{bal_range[1]:,}")
+if bal_range != (bal_min, bal_max): active.append(f"Balance: ₹{bal_range[0]:,}₹{bal_range[1]:,}")
 if active:
-    st.markdown(f"<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>🔽 <b>Active filters:</b> {' · '.join(active)}</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'> <b>Active filters:</b> {'  '.join(active)}</div>", unsafe_allow_html=True)
 
 st.markdown("---")
 
-# ── BALANCE DISTRIBUTION ──
-st.markdown("### 📊 Balance Slab Distribution - National")
+#  BALANCE DISTRIBUTION 
+st.markdown("###  Balance Slab Distribution - National")
 st.markdown("<p class='source-tag'>Source: Rajya Sabha Unstarred Question No. 230, 2024</p>", unsafe_allow_html=True)
 
 slab_filter = st.multiselect("Filter slabs:", balance_dist["Particulars"].tolist(), default=balance_dist["Particulars"].tolist())
@@ -126,8 +126,8 @@ with col2:
 
 st.markdown("---")
 
-# ── STATE BALANCE COMPARISON ──
-st.markdown(f"### 🗺️ State-wise Avg Balance - {len(filtered_states)} States")
+#  STATE BALANCE COMPARISON 
+st.markdown(f"###  State-wise Avg Balance - {len(filtered_states)} States")
 
 nat_avg = state_df["Deposit_Crore"].sum() * 1e7 / state_df["Accounts"].sum()
 color_state_by = st.radio("Color state chart by:", ["Region", "Tier"] if "Tier" in filtered_states.columns else ["Region"], horizontal=True)
@@ -147,17 +147,17 @@ with col1:
 
 with col2:
     st.markdown("**Key Stats**")
-    st.markdown(f"🟢 **Best:** {filtered_states.loc[filtered_states['Avg_Balance_INR'].idxmax(), 'State']} - ₹{filtered_states['Avg_Balance_INR'].max():,.0f}")
-    st.markdown(f"🔴 **Lowest:** {filtered_states.loc[filtered_states['Avg_Balance_INR'].idxmin(), 'State']} - ₹{filtered_states['Avg_Balance_INR'].min():,.0f}")
-    st.markdown(f"📊 **Filtered avg:** ₹{filtered_states['Avg_Balance_INR'].mean():,.0f}")
-    st.markdown(f"📊 **National avg:** ₹{nat_avg:,.0f}")
+    st.markdown(f" **Best:** {filtered_states.loc[filtered_states['Avg_Balance_INR'].idxmax(), 'State']} - ₹{filtered_states['Avg_Balance_INR'].max():,.0f}")
+    st.markdown(f" **Lowest:** {filtered_states.loc[filtered_states['Avg_Balance_INR'].idxmin(), 'State']} - ₹{filtered_states['Avg_Balance_INR'].min():,.0f}")
+    st.markdown(f" **Filtered avg:** ₹{filtered_states['Avg_Balance_INR'].mean():,.0f}")
+    st.markdown(f" **National avg:** ₹{nat_avg:,.0f}")
     spread = filtered_states['Avg_Balance_INR'].max() / filtered_states['Avg_Balance_INR'].min()
-    st.markdown(f"📐 **Gap (max/min):** {spread:.1f}x")
+    st.markdown(f" **Gap (max/min):** {spread:.1f}x")
 
 st.markdown("---")
 
-# ── BIHAR DISTRICT BALANCE ──
-st.markdown(f"### 📍 Bihar District Balance - {len(filtered_bihar)} Districts")
+#  BIHAR DISTRICT BALANCE 
+st.markdown(f"###  Bihar District Balance - {len(filtered_bihar)} Districts")
 st.markdown("<div style='background:#FFFFFF;border-left:4px solid #2563B0;border-radius:6px;padding:10px 14px;font-size:13px;color:#1E293B;line-height:1.6;'>Bihar has the most PMJDY accounts but among the lowest balances. District-level view shows extreme variation within the state.</div>", unsafe_allow_html=True)
 
 bihar_sort = st.radio("Sort Bihar chart by:", ["Avg_Balance_INR", "Accounts", "Balance_Crore"], horizontal=True,
@@ -183,16 +183,16 @@ with col2:
     st.plotly_chart(fig5, use_container_width=True)
     c1, c2 = st.columns(2)
     with c1:
-        st.markdown("🟢 **Top 5**")
+        st.markdown(" **Top 5**")
         st.dataframe(filtered_bihar.nlargest(5, "Avg_Balance_INR")[["District", "Avg_Balance_INR"]].rename(columns={"Avg_Balance_INR": "Avg Balance (₹)"}).reset_index(drop=True), hide_index=True, use_container_width=True)
     with c2:
-        st.markdown("🔴 **Bottom 5**")
+        st.markdown(" **Bottom 5**")
         st.dataframe(filtered_bihar.nsmallest(5, "Avg_Balance_INR")[["District", "Avg_Balance_INR"]].rename(columns={"Avg_Balance_INR": "Avg Balance (₹)"}).reset_index(drop=True), hide_index=True, use_container_width=True)
 
 st.markdown("---")
 
-# ── GLOBAL CONTEXT ──
-st.markdown("### 🌍 India vs Global Benchmarks")
+#  GLOBAL CONTEXT 
+st.markdown("###  India vs Global Benchmarks")
 global_data = pd.DataFrame({
     "Country": ["India (PMJDY)", "Bangladesh", "Kenya (M-Pesa)", "Brazil", "Mexico", "South Africa", "Nigeria"],
     "Account_Ownership_Pct": [80, 54, 82, 84, 49, 85, 45],
@@ -224,9 +224,9 @@ But average balances remain among the lowest globally. <b>Financial inclusion ac
 st.markdown("---")
 col1, col2 = st.columns(2)
 with col1:
-    st.download_button("⬇️ Download Filtered State Data", filtered_states.to_csv(index=False), "pmjdy_balance_states.csv", "text/csv")
+    st.download_button(" Download Filtered State Data", filtered_states.to_csv(index=False), "pmjdy_balance_states.csv", "text/csv")
 with col2:
-    st.download_button("⬇️ Download Filtered Bihar Data", filtered_bihar.to_csv(index=False), "pmjdy_balance_bihar.csv", "text/csv")
+    st.download_button(" Download Filtered Bihar Data", filtered_bihar.to_csv(index=False), "pmjdy_balance_bihar.csv", "text/csv")
 
 st.markdown("---")
-st.markdown("<div class='gov-footer'>🏦 PMJDY Dashboard · Source: Ministry of Finance, GoI · World Bank Global Findex 2021 · Data: 2024</div>", unsafe_allow_html=True)
+st.markdown("<div class='gov-footer'> PMJDY Dashboard  Source: Ministry of Finance, GoI  World Bank Global Findex 2021  Data: 2024</div>", unsafe_allow_html=True)

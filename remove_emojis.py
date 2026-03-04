@@ -2,18 +2,9 @@ import os
 import re
 
 def remove_emojis(text):
-    emoji_pattern = re.compile("["
-        u"\U0001F600-\U0001F64F"
-        u"\U0001F300-\U0001F5FF"
-        u"\U0001F680-\U0001F1FF"
-        u"\U00002700-\U000027BF"
-        u"\U0001F900-\U0001F9FF"
-        u"\U00002500-\U00002BEF"
-        u"\U0001F000-\U0001FAFF"
-        u"\U00000023-\U00000039]\u20e3"
-        u"\U0001FA70-\U0001FAFF"
-        "]+", flags=re.UNICODE)
-    return emoji_pattern.sub('', text)
+    # Remove all non-ASCII characters that are emoji/symbol ranges
+    cleaned = re.sub(r'[^\x00-\x7F\u0900-\u097F\u20B9]+', '', text)
+    return cleaned
 
 folders = ['.', 'pages', 'utils']
 
